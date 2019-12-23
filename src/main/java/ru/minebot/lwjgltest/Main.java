@@ -11,7 +11,7 @@ public class Main {
 
     public static void main(String[] args){
         GLFWErrorCallback.createPrint(System.err).set();
-        if ( !glfwInit() )
+        if (!glfwInit())
             throw new IllegalStateException("Unable to initialize GLFW");
 
         // Configure GLFW
@@ -26,8 +26,8 @@ public class Main {
         scene.start();
 
         // Free the window callbacks and destroy the window
-        glfwFreeCallbacks(scene.getWindowId());
-        glfwDestroyWindow(scene.getWindowId());
+        glfwFreeCallbacks(scene.getWindow().getId());
+        glfwDestroyWindow(scene.getWindow().getId());
 
         // Terminate GLFW and free the error callback
         glfwTerminate();

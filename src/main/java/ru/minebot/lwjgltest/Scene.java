@@ -1,5 +1,8 @@
 package ru.minebot.lwjgltest;
 
+import com.hackoeur.jglm.Mat4;
+import com.hackoeur.jglm.Matrices;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +20,8 @@ public class Scene {
     public Scene(){
         singleton = this;
         window = new Window(1600, 1200, "Hello");
+
+        addObject(new CameraController());
     }
 
     public void addObject(SceneObject object){
@@ -48,11 +53,17 @@ public class Scene {
     }
 
     public void renderTick(){
+        Mat4 projection = Matrices.perspective((float)Math.toRadians(90), 4f/3f, 0.1f, 100f);
+        Mat4 view = Matrices.lookAt(controller.position, controller.getForward(), controller.getUp());
+        for (SceneObject object : objects) {
+            Mat4 model = object.getModelMatrix();
 
+        }
     }
 
     public void logicTick(){
-
+        for (SceneObject object : objects)
+            object.logicTick();
     }
 
     public Window getWindow(){
