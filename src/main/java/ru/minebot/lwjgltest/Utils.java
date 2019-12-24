@@ -5,7 +5,18 @@ import com.hackoeur.jglm.Matrices;
 import com.hackoeur.jglm.Vec3;
 import com.hackoeur.jglm.Vec4;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class Utils {
+
+    public static Random rnd = new Random();
 
     public static Vec4 multiply(Mat4 mat, Vec4 vec){
         float[] a = new float[4];
@@ -59,5 +70,29 @@ public class Utils {
         }
 
         return new Vec3((float)x, (float)y, (float)z);
+    }
+
+    public static InputStream getResource(String path){
+        return Main.class.getClassLoader().getResourceAsStream(path);
+    }
+
+    public static List<String> readResource(String path){
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(getResource(path), StandardCharsets.UTF_8));
+            List<String> result = new ArrayList<>();
+            String line;
+            while ((line = reader.readLine()) != null)
+                result.add(line);
+            return result;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String concatenate(List<String> list){
+        StringBuilder builder = new StringBuilder();
+        list.forEach(builder::append);
+        return builder.toString();
     }
 }

@@ -13,13 +13,13 @@ import static org.lwjgl.system.MemoryStack.stackPush;
 
 public class CameraController extends SceneObject {
 
-    private long windowId;
-    private final float rotateSpeed = 0.1f;
-    private final float flySpeed = 1.0f;
+    protected long windowId;
+    protected final float rotateSpeed = 0.1f;
+    protected final float flySpeed = 1.0f;
 
-    private Vec3 left;
-    private Vec3 forward;
-    private Vec3 up;
+    protected Vec3 left;
+    protected Vec3 forward;
+    protected Vec3 up;
 
     @Override
     public void initialize() {

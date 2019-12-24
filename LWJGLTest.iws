@@ -2,10 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="627aa9d9-89e3-4b09-88e6-8d8e37c02b82" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/LWJGLTest.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/LWJGLTest.ipr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/DirectionalLight.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/LightSource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Mesh.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Shader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Shaders.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/models/Intergalactic_Spaceship.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/shadowMap.frag" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/shadowMap.vert" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LWJGLTest.iws" beforeDir="false" afterPath="$PROJECT_DIR$/LWJGLTest.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/CameraController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/CameraController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Scene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/SceneObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/SceneObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Utils.java" afterDir="false" />
@@ -30,6 +36,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/models" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -39,7 +46,13 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.26382488" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.GLSL" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\serpi\Documents\Java Projects\LWJGLTest\src\main\resources\models" />
+      <recent name="C:\Users\serpi\Documents\Java Projects\LWJGLTest\src\main\resources\shaders" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -80,7 +93,8 @@
       <workItem from="1577078963702" duration="2538000" />
       <workItem from="1577099295569" duration="21000" />
       <workItem from="1577105593075" duration="1369000" />
-      <workItem from="1577116483418" duration="1848000" />
+      <workItem from="1577116483418" duration="4271000" />
+      <workItem from="1577184463861" duration="7763000" />
     </task>
     <servers />
   </component>

@@ -57,6 +57,7 @@ public class Scene {
         Mat4 view = Matrices.lookAt(controller.position, controller.getForward(), controller.getUp());
         for (SceneObject object : objects) {
             Mat4 model = object.getModelMatrix();
+            Mat4 mvp = projection.multiply(view.multiply(model));
 
         }
     }

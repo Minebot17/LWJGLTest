@@ -4,9 +4,14 @@ import com.hackoeur.jglm.Mat4;
 import com.hackoeur.jglm.Vec3;
 
 public abstract class SceneObject {
+    protected int sceneId;
     protected Vec3 position;
     protected Vec3 rotation;
     protected Vec3 scale;
+
+    public SceneObject(){
+        sceneId = Utils.rnd.nextInt();
+    }
 
     public abstract void initialize();
     public abstract void renderTick();
