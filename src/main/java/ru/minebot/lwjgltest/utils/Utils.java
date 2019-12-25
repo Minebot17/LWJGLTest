@@ -96,4 +96,23 @@ public class Utils {
         list.forEach(builder::append);
         return builder.toString();
     }
+
+    public static float[] toFloatArray(List<Vec3> list){
+        float[] result = new float[list.size() * 3];
+        for (int i = 0; i < list.size(); i++){
+            result[i*3] = list.get(i).getX();
+            result[i*3 + 1] = list.get(i).getY();
+            result[i*3 + 2] = list.get(i).getZ();
+        }
+        return result;
+    }
+
+    public static float[] toFloatArray(List<Float> U, List<Float> V){
+        float[] result = new float[U.size()*2];
+        for (int i = 0; i < U.size(); i++){
+            result[i*2] = U.get(i);
+            result[i*2 + 1] = V.get(i);
+        }
+        return result;
+    }
 }

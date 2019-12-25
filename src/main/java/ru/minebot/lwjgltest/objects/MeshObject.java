@@ -1,15 +1,14 @@
 package ru.minebot.lwjgltest.objects;
 
-import ru.minebot.lwjgltest.render.Mesh;
+import ru.minebot.lwjgltest.render.MeshRender;
 import ru.minebot.lwjgltest.render.Shader;
 
 public class MeshObject extends SceneObject {
 
-    protected Mesh mesh;
-    protected Shader shader;
+    protected MeshRender meshRender;
 
-    public MeshObject(Mesh mesh){
-        this.mesh = mesh;
+    public MeshObject(MeshRender mesh){
+        this.meshRender = meshRender;
     }
 
     @Override
