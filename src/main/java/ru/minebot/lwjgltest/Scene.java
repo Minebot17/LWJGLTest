@@ -2,6 +2,9 @@ package ru.minebot.lwjgltest;
 
 import com.hackoeur.jglm.Mat4;
 import com.hackoeur.jglm.Matrices;
+import ru.minebot.lwjgltest.objects.CameraController;
+import ru.minebot.lwjgltest.objects.SceneObject;
+import ru.minebot.lwjgltest.render.Framebuffer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +17,10 @@ public class Scene {
     private CameraController controller;
     private int logicUpdateTime = 50;
     private long logicTicksCount = 0;
+    private boolean isInitialized = false;
 
     private List<SceneObject> objects = new ArrayList<>();
+    private Framebuffer postFramebuffer;
 
     public Scene(){
         singleton = this;
@@ -30,6 +35,9 @@ public class Scene {
     }
 
     public void start(){
+        if (!isInitialized)
+            initialize();
+
         Thread logic = new Thread(() -> {
             while (true){
                 try {
@@ -52,9 +60,16 @@ public class Scene {
         logic.stop();
     }
 
+    // initialize post process, quad vao, msaa FB
+    public void initialize(){
+        postFramebuffer.initialize();
+
+        isInitialized = true;
+    }
+
     public void renderTick(){
         Mat4 projection = Matrices.perspective((float)Math.toRadians(90), 4f/3f, 0.1f, 100f);
-        Mat4 view = Matrices.lookAt(controller.position, controller.getForward(), controller.getUp());
+        Mat4 view = Matrices.lookAt(controller.getPosition(), controller.getForward(), controller.getUp());
         for (SceneObject object : objects) {
             Mat4 model = object.getModelMatrix();
             Mat4 mvp = projection.multiply(view.multiply(model));

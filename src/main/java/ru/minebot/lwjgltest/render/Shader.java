@@ -1,12 +1,14 @@
-package ru.minebot.lwjgltest;
+package ru.minebot.lwjgltest.render;
 
 import com.hackoeur.jglm.Mat3;
 import com.hackoeur.jglm.Mat4;
 import com.hackoeur.jglm.Vec3;
 import com.hackoeur.jglm.Vec4;
 import com.sun.istack.internal.Nullable;
+import org.lwjgl.opengl.GL20;
+import ru.minebot.lwjgltest.utils.Shaders;
+import ru.minebot.lwjgltest.utils.Utils;
 
-import java.nio.DoubleBuffer;
 import java.nio.IntBuffer;
 
 import static org.lwjgl.opengl.GL40.*;
@@ -56,7 +58,7 @@ public class Shader {
     }
 
     private void compile(int id, String path){
-        glShaderSource(id, Utils.concatenate(Utils.readResource(path)));
+        GL20.glShaderSource(id, Utils.concatenate(Utils.readResource(path)));
         glCompileShader(id);
 
         IntBuffer result = IntBuffer.allocate(1);
@@ -71,11 +73,11 @@ public class Shader {
     public <T> void setUniform(String name, T value){
         int location = glGetUniformLocation(programmeId, name);
         if (value instanceof Integer)
-            glUniform1i(location, (int)value);
+            glUniform1i(location, (Integer) value);
         else if (value instanceof Float)
-            glUniform1f(location, (float)value);
+            glUniform1f(location, (Float) value);
         else if (value instanceof Double)
-            glUniform1d(location, (double)value);
+            glUniform1d(location, (Double) value);
         else if (value instanceof Vec3) {
             Vec3 vec = (Vec3)value;
             glUniform3f(location, vec.getX(), vec.getY(), vec.getZ());

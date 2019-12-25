@@ -1,9 +1,10 @@
-package ru.minebot.lwjgltest;
+package ru.minebot.lwjgltest.utils;
 
 import com.hackoeur.jglm.Mat4;
 import com.hackoeur.jglm.Matrices;
 import com.hackoeur.jglm.Vec3;
 import com.hackoeur.jglm.Vec4;
+import ru.minebot.lwjgltest.Main;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -2,19 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="627aa9d9-89e3-4b09-88e6-8d8e37c02b82" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/DirectionalLight.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/LightSource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Mesh.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Shader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Shaders.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/models/Intergalactic_Spaceship.obj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/shadowMap.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/shadowMap.vert" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Framebuffer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/MeshObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Meshes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/models/postQuad.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LWJGLTest.iws" beforeDir="false" afterPath="$PROJECT_DIR$/LWJGLTest.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/CameraController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/CameraController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Mesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Mesh.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Scene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/SceneObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/SceneObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Shader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Shader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/models/Intergalactic_Spaceship.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/models/spaceShip.obj" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -95,6 +91,9 @@
       <workItem from="1577105593075" duration="1369000" />
       <workItem from="1577116483418" duration="4271000" />
       <workItem from="1577184463861" duration="7763000" />
+      <workItem from="1577199105608" duration="892000" />
+      <workItem from="1577200183708" duration="12000" />
+      <workItem from="1577250193125" duration="4352000" />
     </task>
     <servers />
   </component>

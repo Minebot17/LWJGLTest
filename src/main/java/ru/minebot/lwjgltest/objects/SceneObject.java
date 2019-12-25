@@ -1,7 +1,8 @@
-package ru.minebot.lwjgltest;
+package ru.minebot.lwjgltest.objects;
 
 import com.hackoeur.jglm.Mat4;
 import com.hackoeur.jglm.Vec3;
+import ru.minebot.lwjgltest.utils.Utils;
 
 public abstract class SceneObject {
     protected int sceneId;
@@ -19,5 +20,21 @@ public abstract class SceneObject {
 
     public Mat4 getModelMatrix() {
         return Utils.scale(rotation).multiply(Utils.translate(position)).multiply(Utils.scale(scale));
+    }
+
+    public int getSceneId() {
+        return sceneId;
+    }
+
+    public Vec3 getPosition() {
+        return position;
+    }
+
+    public Vec3 getRotation() {
+        return rotation;
+    }
+
+    public Vec3 getScale() {
+        return scale;
     }
 }

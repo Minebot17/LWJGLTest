@@ -1,4 +1,6 @@
-package ru.minebot.lwjgltest;
+package ru.minebot.lwjgltest.utils;
+
+import ru.minebot.lwjgltest.render.Shader;
 
 import java.util.ArrayList;
 import java.util.List;

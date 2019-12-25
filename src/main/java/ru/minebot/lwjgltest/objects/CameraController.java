@@ -1,9 +1,12 @@
-package ru.minebot.lwjgltest;
+package ru.minebot.lwjgltest.objects;
 
 import com.hackoeur.jglm.Matrices;
 import com.hackoeur.jglm.Vec3;
 import com.hackoeur.jglm.Vec4;
 import org.lwjgl.system.MemoryStack;
+import ru.minebot.lwjgltest.Scene;
+import ru.minebot.lwjgltest.utils.Utils;
+import ru.minebot.lwjgltest.Window;
 
 import java.nio.DoubleBuffer;
 

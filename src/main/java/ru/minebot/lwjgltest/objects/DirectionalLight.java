@@ -1,4 +1,4 @@
-package ru.minebot.lwjgltest;
+package ru.minebot.lwjgltest.objects;
 
 import com.hackoeur.jglm.Vec3;
 import static org.lwjgl.opengl.GL40.*;
