@@ -1,11 +1,15 @@
 package ru.minebot.lwjgltest.render;
 
+import ru.minebot.lwjgltest.utils.Utils;
+
+import javax.imageio.ImageIO;
+
 import static org.lwjgl.opengl.GL40.*;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.HashMap;
 
 public class Material {
@@ -18,12 +22,13 @@ public class Material {
     }
 
     // Uniform name -> texture path
-    public void initialization(HashMap<String, String> textures){
+    public void initialization(HashMap<String, String> textures, boolean[] sRGB){
         if (textures == null)
             return;
 
+        int i = 0;
         for (String name : textures.keySet()) {
-            String path = textures.get(name);
+            /*String path = textures.get(name);
             int width, height;
             byte[] data = new byte[0];
             try {
@@ -36,16 +41,28 @@ public class Material {
                 System.err.println("Некорректный BMP-файл\n");
 
             width = ByteBuffer.wrap(data, 0x12, 4).getInt();
-            height = ByteBuffer.wrap(data, 0x16, 4).getInt();
+            height = ByteBuffer.wrap(data, 0x16, 4).getInt();*/
+
+            String path = textures.get(name);
+            BufferedImage image = Utils.loadImage(path);
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            try {
+                String[] splitted = path.split("\\.");
+                ImageIO.write(image, splitted[splitted.length - 1], out);
+            } catch (IOException e) {
+                out = null;
+                e.printStackTrace();
+            }
 
             int textureID = glGenTextures();
             glBindTexture(GL_TEXTURE_2D, textureID);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, ByteBuffer.wrap(data));
+            glTexImage2D(GL_TEXTURE_2D, 0, sRGB[i] ? GL_SRGB : GL_RGB, image.getWidth(), image.getHeight(), 0, GL_BGR, GL_UNSIGNED_BYTE, ByteBuffer.wrap(out.toByteArray()));
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
             glGenerateMipmap(GL_TEXTURE_2D);
 
             this.textures.put(name, textureID);
+            i++;
         }
     }
 

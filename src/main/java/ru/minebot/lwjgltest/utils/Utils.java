@@ -6,6 +6,8 @@ import com.hackoeur.jglm.Vec3;
 import com.hackoeur.jglm.Vec4;
 import ru.minebot.lwjgltest.Main;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -122,5 +124,14 @@ public class Utils {
         for (int i = 0; i < keys.size(); i++)
             result.put(keys.get(i), values.get(i));
         return result;
+    }
+
+    public static BufferedImage loadImage(String path){
+        try {
+            return ImageIO.read(getResource(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

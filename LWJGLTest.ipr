@@ -31,7 +31,9 @@
     <dictionary name="serpi">
       <words>
         <w>bitangent</w>
+        <w>cubemap</w>
         <w>msaa</w>
+        <w>standart</w>
       </words>
     </dictionary>
   </component>

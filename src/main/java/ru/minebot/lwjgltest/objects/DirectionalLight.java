@@ -25,7 +25,7 @@ public class DirectionalLight extends LightSource {
     @Override
     public void initialize() {
         shadowFramebuffer.initialize();
-        shadowMaterial.initialization(null);
+        shadowMaterial.initialization(null, null);
     }
 
     @Override

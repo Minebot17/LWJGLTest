@@ -6,9 +6,13 @@ import ru.minebot.lwjgltest.objects.CameraController;
 import ru.minebot.lwjgltest.objects.SceneObject;
 import ru.minebot.lwjgltest.render.Framebuffer;
 import ru.minebot.lwjgltest.render.FramebufferMSAA;
+import ru.minebot.lwjgltest.render.MaterialCubemap;
+import ru.minebot.lwjgltest.render.MeshRender;
+import ru.minebot.lwjgltest.utils.MeshRenders;
 import ru.minebot.lwjgltest.utils.SceneMatrices;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -25,6 +29,7 @@ public class Scene {
     private SceneMatrices matrices;
     private Framebuffer postFramebuffer;
     private FramebufferMSAA msaaFramebuffer;
+    private MaterialCubemap cubemapMaterial = new MaterialCubemap();
 
     public Scene(){
         singleton = this;
@@ -68,6 +73,14 @@ public class Scene {
     public void initialize(){
         msaaFramebuffer.initialize();
         postFramebuffer.initialize();
+        cubemapMaterial.initialization(new HashMap<String, String>(){{
+                    put("skybox", "textures/sky/sky_neg_x.bmp");
+                    put("skybox0", "textures/sky/sky_pos_x.bmp");
+                    put("skybox1", "textures/sky/sky_pos_y.bmp");
+                    put("skybox2", "textures/sky/sky_neg_y.bmp");
+                    put("skybox3", "textures/sky/sky_pos_z.bmp");
+                    put("skybox4", "textures/sky/sky_neg_z.bmp");
+        }}, new boolean[]{ true, true, true, true, true, true });
 
         addObject(new CameraController());
 
