@@ -41,13 +41,17 @@ public class Scene {
 
     public void addObject(SceneObject object){
         object.initialize();
-        objects.add(object);
+        if (object instanceof LightSource)
+            lightObjects.add((LightSource) object);
+        else
+            objects.add(object);
     }
 
     public void start(){
         if (!isInitialized)
             initialize();
 
+        logicTick();
         Thread logic = new Thread(() -> {
             while (true){
                 try {

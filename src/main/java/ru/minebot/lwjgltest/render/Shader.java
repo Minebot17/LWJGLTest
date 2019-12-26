@@ -5,10 +5,11 @@ import com.hackoeur.jglm.Mat4;
 import com.hackoeur.jglm.Vec3;
 import com.hackoeur.jglm.Vec4;
 import com.sun.istack.internal.Nullable;
-import org.lwjgl.opengl.GL20;
 import ru.minebot.lwjgltest.utils.Shaders;
 import ru.minebot.lwjgltest.utils.Utils;
 
+import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
 import static org.lwjgl.opengl.GL40.*;
@@ -43,12 +44,7 @@ public class Shader {
             glAttachShader(programmeId, geometryId);
         glLinkProgram(programmeId);
 
-        IntBuffer result = IntBuffer.allocate(1);
-        IntBuffer infoLogLength = IntBuffer.allocate(1);
-
-        glGetProgramiv(programmeId, GL_LINK_STATUS, result);
-        glGetShaderiv(programmeId, GL_INFO_LOG_LENGTH, infoLogLength);
-        if (infoLogLength.get() > 0)
+        if (glGetProgrami(programmeId, GL_LINK_STATUS) != 1)
             System.err.println(glGetProgramInfoLog(programmeId));
 
         glDeleteShader(vertexId);
@@ -58,15 +54,10 @@ public class Shader {
     }
 
     private void compile(int id, String path){
-        GL20.glShaderSource(id, Utils.concatenate(Utils.readResource(path)));
+        glShaderSource(id, Utils.concatenate(Utils.readResource(path)));
         glCompileShader(id);
 
-        IntBuffer result = IntBuffer.allocate(1);
-        IntBuffer infoLogLength = IntBuffer.allocate(1);
-
-        glGetShaderiv(id, GL_COMPILE_STATUS, result);
-        glGetShaderiv(id, GL_INFO_LOG_LENGTH, infoLogLength);
-        if (infoLogLength.get() > 0)
+        if (glGetShaderi(id, GL_COMPILE_STATUS) != 1)
             System.err.println(glGetShaderInfoLog(id));
     }
 
@@ -87,9 +78,9 @@ public class Shader {
             glUniform4f(location, vec.getX(), vec.getY(), vec.getZ(), vec.getW());
         }
         else if (value instanceof Mat3)
-            glUniformMatrix3fv(location, false, ((Mat3)value).getBuffer());
+            glUniformMatrix3fv(location, false, (FloatBuffer)((Mat3)value).getBuffer().flip());
         else if (value instanceof Mat4)
-            glUniformMatrix4fv(location, false, ((Mat4)value).getBuffer());
+            glUniformMatrix4fv(location, false, (FloatBuffer) ((Mat4)value).getBuffer().flip());
         else if (value instanceof int[])
             glUniform1iv(location, (int[])value);
         else if (value instanceof float[])

@@ -110,7 +110,7 @@ public class Utils {
 
     public static String concatenate(List<String> list){
         StringBuilder builder = new StringBuilder();
-        list.forEach(builder::append);
+        list.forEach(s -> builder.append(s).append("\n"));
         return builder.toString();
     }
 

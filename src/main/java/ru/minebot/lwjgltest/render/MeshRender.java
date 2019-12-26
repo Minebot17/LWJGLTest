@@ -68,6 +68,6 @@ public class MeshRender {
     protected void enableBuffer(int index, int id, int size){
         glEnableVertexAttribArray(index);
         glBindBuffer(GL_ARRAY_BUFFER, id);
-        glVertexAttribPointer(index, size, GL_FLAT, false, 0, 0);
+        glVertexAttribPointer(index, size, GL_FLOAT, false, 0, 0);
     }
 }
