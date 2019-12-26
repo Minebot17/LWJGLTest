@@ -1,9 +1,6 @@
 package ru.minebot.lwjgltest.utils;
 
-import com.hackoeur.jglm.Mat4;
-import com.hackoeur.jglm.Matrices;
-import com.hackoeur.jglm.Vec3;
-import com.hackoeur.jglm.Vec4;
+import com.hackoeur.jglm.*;
 import ru.minebot.lwjgltest.Main;
 
 import javax.imageio.ImageIO;
@@ -35,13 +32,30 @@ public class Utils {
         return new Vec3(vec.getX(), vec.getY(), vec.getZ());
     }
 
+    public static Mat3 toMat3(Mat4 mat){
+        return new Mat3(
+                ((Vec4)mat.getColumn(0)).getX(), ((Vec4)mat.getColumn(0)).getY(), ((Vec4)mat.getColumn(0)).getZ(),
+                ((Vec4)mat.getColumn(1)).getX(), ((Vec4)mat.getColumn(1)).getY(), ((Vec4)mat.getColumn(1)).getZ(),
+                ((Vec4)mat.getColumn(2)).getX(), ((Vec4)mat.getColumn(2)).getY(), ((Vec4)mat.getColumn(2)).getZ()
+        );
+    }
+
+    public static Mat4 toMat4(Mat3 mat){
+        return new Mat4(
+                ((Vec3)mat.getColumn(0)).getX(), ((Vec3)mat.getColumn(0)).getY(), ((Vec3)mat.getColumn(0)).getZ(), 0f,
+                ((Vec3)mat.getColumn(1)).getX(), ((Vec3)mat.getColumn(1)).getY(), ((Vec3)mat.getColumn(1)).getZ(), 0f,
+                ((Vec3)mat.getColumn(2)).getX(), ((Vec3)mat.getColumn(2)).getY(), ((Vec3)mat.getColumn(2)).getZ(), 0f,
+                0f, 0f, 0f, 0f
+        );
+    }
+
     public static Mat4 translate(Vec3 vec){
-        return new Mat4(new float[] {
+        return new Mat4(
                 1, 0, 0, vec.getX(),
                 0, 1, 0, vec.getY(),
                 0, 0, 1, vec.getZ(),
                 0, 0, 0, 1
-        });
+        ).transpose();
     }
 
     public static Mat4 scale(Vec3 vec){

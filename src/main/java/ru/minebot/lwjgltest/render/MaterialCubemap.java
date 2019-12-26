@@ -19,7 +19,7 @@ public class MaterialCubemap extends Material {
     }
 
     @Override
-    public void initialization(HashMap<String, String> textures, boolean[] sRGB){
+    public void initialize(HashMap<String, String> textures, boolean[] sRGB){
         if (textures == null)
             return;
 

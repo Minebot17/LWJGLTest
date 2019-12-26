@@ -55,4 +55,8 @@ public class Framebuffer {
     public int getFramebufferId() {
         return framebufferId;
     }
+
+    public int getTextureId() {
+        return textureId;
+    }
 }

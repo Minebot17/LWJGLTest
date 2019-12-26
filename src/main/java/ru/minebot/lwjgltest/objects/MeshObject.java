@@ -1,30 +1,29 @@
 package ru.minebot.lwjgltest.objects;
 
+import ru.minebot.lwjgltest.render.Material;
 import ru.minebot.lwjgltest.render.MeshRender;
-import ru.minebot.lwjgltest.render.Shader;
 
-public class MeshObject extends SceneObject {
+import java.util.HashMap;
+
+public abstract class MeshObject extends SceneObject {
 
     protected MeshRender meshRender;
+    protected Material material;
+    protected HashMap<String, String> textures;
+    protected boolean[] sRGB;
 
-    public MeshObject(MeshRender meshRender){
+    public MeshObject(MeshRender meshRender, Material material, HashMap<String, String> textures, boolean[] sRGB) {
         this.meshRender = meshRender;
+        this.material = material;
     }
 
     @Override
     public void initialize() {
-
+        material.initialize(textures, sRGB);
     }
 
-    @Override
-    public void renderTick() {
-
-    }
-
-    @Override
-    public void logicTick() {
-
-    }
+    public abstract void renderTick();
+    public abstract void logicTick();
 
     public MeshRender getMeshRender() {
         return meshRender;

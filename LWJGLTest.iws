@@ -2,32 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="627aa9d9-89e3-4b09-88e6-8d8e37c02b82" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/MaterialCubemap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/cubemap.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/cubemap.vert" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/post.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/post.vert" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/standart.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/standart.geom" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/standart.vert" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/textures/sky/sky_neg_x.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/textures/sky/sky_neg_y.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/textures/sky/sky_neg_z.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/textures/sky/sky_pos_x.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/textures/sky/sky_pos_y.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/textures/sky/sky_pos_z.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/textures/spaceShip/spaceShipAlbedo.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/textures/spaceShip/spaceShipNormals.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/textures/spaceShip/spaceShipSpecular.bmp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LWJGLTest.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/LWJGLTest.ipr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/StandartMeshObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LWJGLTest.iws" beforeDir="false" afterPath="$PROJECT_DIR$/LWJGLTest.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Scene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/DirectionalLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/DirectionalLight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/LightSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/LightSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/MeshObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/MeshObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/SceneObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/SceneObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/Framebuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/Framebuffer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/Material.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/Material.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/MeshRenders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/MeshRenders.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Meshes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Meshes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Shaders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Shaders.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/MaterialCubemap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/MaterialCubemap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/Mesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/Mesh.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/SceneMatrices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/SceneMatrices.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/models/postQuad.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/models/postQuad.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/post.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/post.frag" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -117,7 +107,9 @@
       <workItem from="1577260936906" duration="131000" />
       <workItem from="1577281403129" duration="6422000" />
       <workItem from="1577335371345" duration="4639000" />
-      <workItem from="1577341694680" duration="3434000" />
+      <workItem from="1577341694680" duration="3593000" />
+      <workItem from="1577346239563" duration="27000" />
+      <workItem from="1577359107135" duration="10466000" />
     </task>
     <servers />
   </component>

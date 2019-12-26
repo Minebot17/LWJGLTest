@@ -11,6 +11,13 @@ public abstract class SceneObject {
     protected Vec3 scale;
 
     public SceneObject(){
+        this(new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(1, 1, 1));
+    }
+
+    public SceneObject(Vec3 position, Vec3 rotation, Vec3 scale) {
+        this.position = position;
+        this.rotation = rotation;
+        this.scale = scale;
         sceneId = Utils.rnd.nextInt();
     }
 

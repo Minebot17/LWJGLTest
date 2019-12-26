@@ -10,22 +10,22 @@ import ru.minebot.lwjgltest.utils.Shaders;
 import ru.minebot.lwjgltest.utils.VecBasis;
 
 import java.util.HashMap;
-
-import static org.lwjgl.opengl.GL40.*;
+import java.util.List;
 
 public class DirectionalLight extends LightSource {
 
     protected FramebufferShadow shadowFramebuffer = new FramebufferShadow(Scene.singleton.getWindow(), 1024);
     protected Material shadowMaterial = new Material(Shaders.shadowMap);
+    protected Mat4 shadowMvp;
 
-    public DirectionalLight(float lightPower, Vec3 lightColor) {
-        super(lightPower, lightColor);
+    public DirectionalLight(Vec3 position, Vec3 lookVector, float lightPower, Vec3 lightColor) {
+        super(position, lookVector, lightPower, lightColor);
     }
 
     @Override
     public void initialize() {
         shadowFramebuffer.initialize();
-        shadowMaterial.initialization(null, null);
+        shadowMaterial.initialize(null, null);
     }
 
     @Override
@@ -33,14 +33,21 @@ public class DirectionalLight extends LightSource {
         VecBasis basis = new VecBasis(rotation);
         Mat4 shadowProjection = Matrices.ortho(-10, 10, -10, 10, -5, 8);
         Mat4 shadowView = Matrices.lookAt(position, basis.getForward(), basis.getUp());
-        Mat4 shadowMvp = shadowProjection.multiply(shadowView.multiply(Scene.singleton.getMatrices().getModel()));
+        List<SceneObject> objects = Scene.singleton.getObjects();
 
         shadowFramebuffer.bind(true);
-        shadowMaterial.bind(new HashMap<String, Object>(){{ put("shadow_mvp", shadowMvp); }});
-        Scene.singleton.getObjects().forEach(o -> {
-            if (o instanceof MeshObject)
-                ((MeshObject) o).getMeshRender().renderVertices();
-        });
+        shadowMaterial.bind();
+        shadowMaterial.bindTextures();
+        for (SceneObject object : objects) {
+            if (!(object instanceof MeshObject))
+                continue;
+
+            shadowMvp = shadowProjection.multiply(shadowView.multiply(object.getModelMatrix()));
+            shadowMaterial.bindData(new HashMap<String, Object>() {{
+                put("shadow_mvp", shadowMvp);
+            }});
+            ((MeshObject) object).getMeshRender().renderVertices();
+        }
         shadowMaterial.unbind();
         shadowFramebuffer.unbind();
     }
@@ -48,5 +55,15 @@ public class DirectionalLight extends LightSource {
     @Override
     public void logicTick() {
 
+    }
+
+    @Override
+    public int getShadowTexture() {
+        return shadowFramebuffer.getTextureId();
+    }
+
+    @Override
+    public Mat4 getShadowMVP() {
+        return shadowMvp;
     }
 }

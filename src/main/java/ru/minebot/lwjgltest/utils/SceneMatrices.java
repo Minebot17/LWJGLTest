@@ -5,6 +5,8 @@ import com.hackoeur.jglm.Mat4;
 public class SceneMatrices {
     private Mat4 projection;
     private Mat4 view;
+
+    // model and mvp for current rendered SceneObject
     private Mat4 model;
     private Mat4 mvp;
 

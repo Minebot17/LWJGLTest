@@ -2,20 +2,20 @@ package ru.minebot.lwjgltest;
 
 import com.hackoeur.jglm.Mat4;
 import com.hackoeur.jglm.Matrices;
-import ru.minebot.lwjgltest.objects.CameraController;
-import ru.minebot.lwjgltest.objects.SceneObject;
-import ru.minebot.lwjgltest.render.Framebuffer;
-import ru.minebot.lwjgltest.render.FramebufferMSAA;
-import ru.minebot.lwjgltest.render.MaterialCubemap;
-import ru.minebot.lwjgltest.render.MeshRender;
+import com.hackoeur.jglm.Vec3;
+import ru.minebot.lwjgltest.objects.*;
+import ru.minebot.lwjgltest.render.*;
 import ru.minebot.lwjgltest.utils.MeshRenders;
 import ru.minebot.lwjgltest.utils.SceneMatrices;
+import ru.minebot.lwjgltest.utils.Shaders;
+import ru.minebot.lwjgltest.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.opengl.GL40.*;
 
 public class Scene {
     public static Scene singleton;
@@ -26,14 +26,15 @@ public class Scene {
     private boolean isInitialized = false;
 
     private List<SceneObject> objects = new ArrayList<>();
+    private List<LightSource> lightObjects = new ArrayList<>();
     private SceneMatrices matrices;
     private Framebuffer postFramebuffer;
     private FramebufferMSAA msaaFramebuffer;
     private MaterialCubemap cubemapMaterial = new MaterialCubemap();
 
-    public Scene(){
+    public Scene(Window window){
         singleton = this;
-        window = new Window(1600, 1200, "Hello");
+        this.window = window;
         postFramebuffer = new Framebuffer(window);
         msaaFramebuffer = new FramebufferMSAA(window, 4);
     }
@@ -73,7 +74,7 @@ public class Scene {
     public void initialize(){
         msaaFramebuffer.initialize();
         postFramebuffer.initialize();
-        cubemapMaterial.initialization(new HashMap<String, String>(){{
+        cubemapMaterial.initialize(new HashMap<String, String>(){{
                     put("skybox", "textures/sky/sky_neg_x.bmp");
                     put("skybox0", "textures/sky/sky_pos_x.bmp");
                     put("skybox1", "textures/sky/sky_pos_y.bmp");
@@ -83,6 +84,12 @@ public class Scene {
         }}, new boolean[]{ true, true, true, true, true, true });
 
         addObject(new CameraController());
+        addObject(new DirectionalLight(new Vec3(4, 4, 0), new Vec3(0, 0, -(float)Math.PI / 4f * 3f), 5, new Vec3(0, 1, 0)));
+        addObject(new StandartMeshObject(MeshRenders.spaceShipRender,
+                "textures/spaceShip/spaceShipAlbedo.bmp",
+                "textures/spaceShip/spaceShipNormals.bmp",
+                "textures/spaceShip/spaceShipSpecular.bmp"
+        ));
 
         isInitialized = true;
     }
@@ -91,14 +98,46 @@ public class Scene {
         Mat4 projection = Matrices.perspective((float)Math.toRadians(90), 4f/3f, 0.1f, 100f);
         Mat4 view = Matrices.lookAt(controller.getPosition(), controller.getBasis().getForward(), controller.getBasis().getUp());
         matrices = new SceneMatrices(projection, view);
+
+        lightObjects.forEach(LightSource::renderTick);
+        msaaFramebuffer.bind(true);
         for (SceneObject object : objects) {
             Mat4 model = object.getModelMatrix();
             Mat4 mvp = projection.multiply(view.multiply(model));
             matrices.setModel(model);
             matrices.setMvp(mvp);
-
-            // TODO
+            object.renderTick();
         }
+
+        renderCubemap();
+        glBindFramebuffer(GL_READ_FRAMEBUFFER, msaaFramebuffer.getFramebufferId());
+        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, postFramebuffer.getFramebufferId());
+        glBlitFramebuffer(0, 0, window.getWidth(), window.getHeight(), 0, 0, window.getWidth(), window.getHeight(), GL_COLOR_BUFFER_BIT, GL_NEAREST);
+        msaaFramebuffer.unbind();
+        renderPost();
+    }
+
+    private void renderCubemap(){
+        Mat4 skyView = Utils.toMat4(Utils.toMat3(matrices.getView()));
+        Mat4 skyMvp = matrices.getProjection().multiply(skyView);
+        glDepthMask(false);
+        cubemapMaterial.bindAll(new HashMap<String, Object>(){{ put("mvp", skyMvp); }});
+        MeshRenders.cubemapRender.render();
+        glDepthMask(true);
+    }
+
+    private void renderPost(){
+        glDisable(GL_DEPTH_TEST);
+        glUseProgram(Shaders.post.getProgrammeId());
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, postFramebuffer.getTextureId());
+        Shaders.post.setUniform("rendered_texture", 0);
+        Shaders.post.setUniform("time", glfwGetTime());
+        Shaders.post.setUniform("gamma", 1.0f/2.2f);
+        MeshRenders.postQuadRender.render();
+
+        glEnable(GL_DEPTH_TEST);
     }
 
     public void logicTick(){
@@ -128,5 +167,9 @@ public class Scene {
 
     public List<SceneObject> getObjects() {
         return objects;
+    }
+
+    public List<LightSource> getLightObjects() {
+        return lightObjects;
     }
 }

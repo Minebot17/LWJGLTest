@@ -68,20 +68,20 @@ public class Mesh {
                     for (int i = 0; i < 9; i++)
                         values[i] = Integer.parseInt(splitted[1 + i]);
 
-                    vertices.add(v.get(values[0]));
-                    U.add(vtX.get(values[1]));
-                    V.add(vtY.get(values[1]));
-                    normal.add(vn.get(values[2]));
+                    vertices.add(v.get(values[0] - 1));
+                    U.add(vtX.get(values[1] - 1));
+                    V.add(vtY.get(values[1] - 1));
+                    normal.add(vn.get(values[2] - 1));
 
-                    vertices.add(v.get(values[3]));
-                    U.add(vtX.get(values[4]));
-                    V.add(vtY.get(values[4]));
-                    normal.add(vn.get(values[5]));
+                    vertices.add(v.get(values[3] - 1));
+                    U.add(vtX.get(values[4] - 1));
+                    V.add(vtY.get(values[4] - 1));
+                    normal.add(vn.get(values[5] - 1));
 
-                    vertices.add(v.get(values[6]));
-                    U.add(vtX.get(values[7]));
-                    V.add(vtY.get(values[7]));
-                    normal.add(vn.get(values[8]));
+                    vertices.add(v.get(values[6] - 1));
+                    U.add(vtX.get(values[7] - 1));
+                    V.add(vtY.get(values[7] - 1));
+                    normal.add(vn.get(values[8] - 1));
                 }
             }
 

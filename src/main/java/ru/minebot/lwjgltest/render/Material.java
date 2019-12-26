@@ -22,7 +22,7 @@ public class Material {
     }
 
     // Uniform name -> texture path
-    public void initialization(HashMap<String, String> textures, boolean[] sRGB){
+    public void initialize(HashMap<String, String> textures, boolean[] sRGB){
         if (textures == null)
             return;
 
@@ -67,17 +67,21 @@ public class Material {
     }
 
     // Uniform name -> uniform data, pre-render
-    public void bind(HashMap<String, Object> data) {
+    public void bindAll(HashMap<String, Object> data) {
         glUseProgram(shader.getProgrammeId());
         bindTextures();
         bindData(data);
+    }
+
+    public void bind(){
+        glUseProgram(shader.getProgrammeId());
     }
 
     public void unbind(){
         glUseProgram(0);
     }
 
-    protected void bindTextures(){
+    public void bindTextures(){
         int i = 0;
         for (String name : textures.keySet()){
             glActiveTexture(GL_TEXTURE0 + i);
@@ -88,8 +92,12 @@ public class Material {
     }
 
     // Uniform name -> uniform data, pre-render
-    protected void bindData(HashMap<String, Object> data) {
+    public void bindData(HashMap<String, Object> data) {
         for (String name : data.keySet())
             shader.setUniform(name, data.get(name));
+    }
+
+    public Shader getShader() {
+        return shader;
     }
 }

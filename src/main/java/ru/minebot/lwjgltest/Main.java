@@ -23,6 +23,7 @@ public class Main {
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); // the window will stay hidden after creation
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
 
+        Window window = new Window(1600, 1200, "Hello");
         createCapabilities();
         glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
 
@@ -32,7 +33,7 @@ public class Main {
         MeshRenders.initialize();
 
         // start scene
-        Scene scene = new Scene();
+        Scene scene = new Scene(window);
         scene.start();
 
         // Free the window callbacks and destroy the window
