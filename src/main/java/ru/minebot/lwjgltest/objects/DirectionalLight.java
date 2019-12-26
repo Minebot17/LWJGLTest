@@ -1,12 +1,22 @@
 package ru.minebot.lwjgltest.objects;
 
+import com.hackoeur.jglm.Mat4;
+import com.hackoeur.jglm.Matrices;
 import com.hackoeur.jglm.Vec3;
+import ru.minebot.lwjgltest.Scene;
+import ru.minebot.lwjgltest.render.FramebufferShadow;
+import ru.minebot.lwjgltest.render.Material;
+import ru.minebot.lwjgltest.utils.Shaders;
+import ru.minebot.lwjgltest.utils.VecBasis;
+
+import java.util.HashMap;
+
 import static org.lwjgl.opengl.GL40.*;
 
 public class DirectionalLight extends LightSource {
 
-    protected int shadowFramebuffer;
-    protected int shadowTexture;
+    protected FramebufferShadow shadowFramebuffer = new FramebufferShadow(Scene.singleton.getWindow(), 1024);
+    protected Material shadowMaterial = new Material(Shaders.shadowMap);
 
     public DirectionalLight(float lightPower, Vec3 lightColor) {
         super(lightPower, lightColor);
@@ -14,27 +24,25 @@ public class DirectionalLight extends LightSource {
 
     @Override
     public void initialize() {
-        shadowFramebuffer = glGenFramebuffers();
-        glBindFramebuffer(GL_FRAMEBUFFER, shadowFramebuffer);
-
-        shadowTexture = glGenTextures();
-        glBindTexture(GL_TEXTURE_2D, shadowTexture);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, 1024, 1024, 0, GL_DEPTH_COMPONENT, GL_FLAT, 0);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
-        glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, shadowTexture, 0);
-        glDrawBuffer(GL_NONE);
-
-        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-            System.err.println("Framebuffer of " + getClass().getName() + " is not ok");
+        shadowFramebuffer.initialize();
+        shadowMaterial.initialization(null);
     }
 
     @Override
     public void renderTick() {
-        // TODO
+        VecBasis basis = new VecBasis(rotation);
+        Mat4 shadowProjection = Matrices.ortho(-10, 10, -10, 10, -5, 8);
+        Mat4 shadowView = Matrices.lookAt(position, basis.getForward(), basis.getUp());
+        Mat4 shadowMvp = shadowProjection.multiply(shadowView.multiply(Scene.singleton.getMatrices().getModel()));
+
+        shadowFramebuffer.bind(true);
+        shadowMaterial.bind(new HashMap<String, Object>(){{ put("shadow_mvp", shadowMvp); }});
+        Scene.singleton.getObjects().forEach(o -> {
+            if (o instanceof MeshObject)
+                ((MeshObject) o).getMeshRender().renderVertices();
+        });
+        shadowMaterial.unbind();
+        shadowFramebuffer.unbind();
     }
 
     @Override

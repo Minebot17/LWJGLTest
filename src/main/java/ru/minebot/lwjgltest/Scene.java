@@ -5,6 +5,8 @@ import com.hackoeur.jglm.Matrices;
 import ru.minebot.lwjgltest.objects.CameraController;
 import ru.minebot.lwjgltest.objects.SceneObject;
 import ru.minebot.lwjgltest.render.Framebuffer;
+import ru.minebot.lwjgltest.render.FramebufferMSAA;
+import ru.minebot.lwjgltest.utils.SceneMatrices;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +22,15 @@ public class Scene {
     private boolean isInitialized = false;
 
     private List<SceneObject> objects = new ArrayList<>();
+    private SceneMatrices matrices;
     private Framebuffer postFramebuffer;
+    private FramebufferMSAA msaaFramebuffer;
 
     public Scene(){
         singleton = this;
         window = new Window(1600, 1200, "Hello");
-
-        addObject(new CameraController());
+        postFramebuffer = new Framebuffer(window);
+        msaaFramebuffer = new FramebufferMSAA(window, 4);
     }
 
     public void addObject(SceneObject object){
@@ -62,18 +66,25 @@ public class Scene {
 
     // initialize post process, quad vao, msaa FB
     public void initialize(){
+        msaaFramebuffer.initialize();
         postFramebuffer.initialize();
+
+        addObject(new CameraController());
 
         isInitialized = true;
     }
 
     public void renderTick(){
         Mat4 projection = Matrices.perspective((float)Math.toRadians(90), 4f/3f, 0.1f, 100f);
-        Mat4 view = Matrices.lookAt(controller.getPosition(), controller.getForward(), controller.getUp());
+        Mat4 view = Matrices.lookAt(controller.getPosition(), controller.getBasis().getForward(), controller.getBasis().getUp());
+        matrices = new SceneMatrices(projection, view);
         for (SceneObject object : objects) {
             Mat4 model = object.getModelMatrix();
             Mat4 mvp = projection.multiply(view.multiply(model));
+            matrices.setModel(model);
+            matrices.setMvp(mvp);
 
+            // TODO
         }
     }
 
@@ -96,5 +107,13 @@ public class Scene {
 
     public void setCameraController(CameraController controller){
         this.controller = controller;
+    }
+
+    public SceneMatrices getMatrices() {
+        return matrices;
+    }
+
+    public List<SceneObject> getObjects() {
+        return objects;
     }
 }

@@ -9,9 +9,11 @@ public class MeshRenders {
 
     public static List<MeshRender> meshRenders = new ArrayList<>();
     public static MeshRender spaceShipRender;
+    public static MeshRender postQuadRender;
 
-    public void initialization(){
+    public static void initialize(){
         spaceShipRender = new MeshRender(Meshes.spaceShip);
+        postQuadRender = new MeshRender(Meshes.postQuad);
 
         meshRenders.forEach(MeshRender::initialize);
     }

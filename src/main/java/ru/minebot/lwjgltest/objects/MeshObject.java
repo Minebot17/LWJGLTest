@@ -7,7 +7,7 @@ public class MeshObject extends SceneObject {
 
     protected MeshRender meshRender;
 
-    public MeshObject(MeshRender mesh){
+    public MeshObject(MeshRender meshRender){
         this.meshRender = meshRender;
     }
 
@@ -24,5 +24,9 @@ public class MeshObject extends SceneObject {
     @Override
     public void logicTick() {
 
+    }
+
+    public MeshRender getMeshRender() {
+        return meshRender;
     }
 }

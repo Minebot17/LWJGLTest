@@ -1,6 +1,10 @@
 package ru.minebot.lwjgltest;
 
 import org.lwjgl.glfw.GLFWErrorCallback;
+import ru.minebot.lwjgltest.render.MeshRender;
+import ru.minebot.lwjgltest.utils.MeshRenders;
+import ru.minebot.lwjgltest.utils.Meshes;
+import ru.minebot.lwjgltest.utils.Shaders;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
@@ -22,6 +26,12 @@ public class Main {
         createCapabilities();
         glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
 
+        // load resources
+        Meshes.initialize();
+        Shaders.initialize();
+        MeshRenders.initialize();
+
+        // start scene
         Scene scene = new Scene();
         scene.start();
 

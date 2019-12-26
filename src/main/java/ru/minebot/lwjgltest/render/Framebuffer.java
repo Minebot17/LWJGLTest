@@ -38,6 +38,20 @@ public class Framebuffer {
             System.err.println("Framebuffer isn't ok");
     }
 
+    public void bind(boolean clear){
+        glBindFramebuffer(GL_FRAMEBUFFER, framebufferId);
+        glViewport(0, 0, window.getWidth(), window.getHeight());
+        if (clear){
+            glClearColor(0.0f, 0.0f, 0.25f, 0.0f);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        }
+    }
+
+    public void unbind(){
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        glViewport(0, 0, window.getWidth(), window.getHeight());
+    }
+
     public int getFramebufferId() {
         return framebufferId;
     }

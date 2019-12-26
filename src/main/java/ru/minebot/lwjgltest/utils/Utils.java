@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -113,6 +114,13 @@ public class Utils {
             result[i*2] = U.get(i);
             result[i*2 + 1] = V.get(i);
         }
+        return result;
+    }
+
+    public static HashMap<String, Object> toHashMap(List<String> keys, List<Object> values){
+        HashMap<String, Object> result = new HashMap<>();
+        for (int i = 0; i < keys.size(); i++)
+            result.put(keys.get(i), values.get(i));
         return result;
     }
 }

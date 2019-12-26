@@ -2,12 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="627aa9d9-89e3-4b09-88e6-8d8e37c02b82" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/Material.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/MeshRender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/MeshRenders.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LWJGLTest.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/LWJGLTest.ipr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/FramebufferMSAA.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/FramebufferShadow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/SceneMatrices.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/VecBasis.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LWJGLTest.iws" beforeDir="false" afterPath="$PROJECT_DIR$/LWJGLTest.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Scene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/CameraController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/CameraController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/DirectionalLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/DirectionalLight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/LightSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/LightSource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/MeshObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/MeshObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/Framebuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/Framebuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/Material.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/Material.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/MeshRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/MeshRender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/MeshRenders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/MeshRenders.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Utils.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -92,7 +101,10 @@
       <workItem from="1577184463861" duration="7763000" />
       <workItem from="1577199105608" duration="892000" />
       <workItem from="1577200183708" duration="12000" />
-      <workItem from="1577250193125" duration="9329000" />
+      <workItem from="1577250193125" duration="9437000" />
+      <workItem from="1577260936906" duration="131000" />
+      <workItem from="1577281403129" duration="6422000" />
+      <workItem from="1577335371345" duration="4474000" />
     </task>
     <servers />
   </component>
