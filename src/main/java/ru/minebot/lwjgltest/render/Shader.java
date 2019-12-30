@@ -78,9 +78,9 @@ public class Shader {
             glUniform4f(location, vec.getX(), vec.getY(), vec.getZ(), vec.getW());
         }
         else if (value instanceof Mat3)
-            glUniformMatrix3fv(location, false, (FloatBuffer)((Mat3)value).getBuffer().flip());
+            glUniformMatrix3fv(location, false, ((Mat3)value).getBuffer().array());
         else if (value instanceof Mat4)
-            glUniformMatrix4fv(location, false, (FloatBuffer) ((Mat4)value).getBuffer().flip());
+            glUniformMatrix4fv(location, false, ((Mat4)value).getBuffer().array());
         else if (value instanceof int[])
             glUniform1iv(location, (int[])value);
         else if (value instanceof float[])

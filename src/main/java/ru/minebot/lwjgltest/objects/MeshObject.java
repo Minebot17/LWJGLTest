@@ -1,5 +1,6 @@
 package ru.minebot.lwjgltest.objects;
 
+import com.hackoeur.jglm.Vec3;
 import ru.minebot.lwjgltest.render.Material;
 import ru.minebot.lwjgltest.render.MeshRender;
 
@@ -12,9 +13,12 @@ public abstract class MeshObject extends SceneObject {
     protected HashMap<String, String> textures;
     protected boolean[] sRGB;
 
-    public MeshObject(MeshRender meshRender, Material material, HashMap<String, String> textures, boolean[] sRGB) {
+    public MeshObject(Vec3 position, Vec3 rotation, Vec3 scale, MeshRender meshRender, Material material, HashMap<String, String> textures, boolean[] sRGB) {
+        super(position, rotation, scale);
         this.meshRender = meshRender;
         this.material = material;
+        this.textures = textures;
+        this.sRGB = sRGB;
     }
 
     @Override

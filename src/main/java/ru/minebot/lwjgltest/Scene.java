@@ -3,6 +3,7 @@ package ru.minebot.lwjgltest;
 import com.hackoeur.jglm.Mat4;
 import com.hackoeur.jglm.Matrices;
 import com.hackoeur.jglm.Vec3;
+import com.hackoeur.jglm.Vec4;
 import ru.minebot.lwjgltest.objects.*;
 import ru.minebot.lwjgltest.render.*;
 import ru.minebot.lwjgltest.utils.MeshRenders;
@@ -24,6 +25,9 @@ public class Scene {
     private int logicUpdateTime = 50;
     private long logicTicksCount = 0;
     private boolean isInitialized = false;
+
+    private long lastTime;
+    private long deltaTime;
 
     private List<SceneObject> objects = new ArrayList<>();
     private List<LightSource> lightObjects = new ArrayList<>();
@@ -51,8 +55,9 @@ public class Scene {
         if (!isInitialized)
             initialize();
 
+        lastTime = System.nanoTime();
         logicTick();
-        Thread logic = new Thread(() -> {
+        /*Thread logic = new Thread(() -> {
             while (true){
                 try {
                     logicTicksCount++;
@@ -64,14 +69,14 @@ public class Scene {
                 }
             }
         });
-        logic.start();
+        logic.start();*/
 
         while (!glfwWindowShouldClose(window.getId())) {
             renderTick();
             glfwSwapBuffers(window.getId());
             glfwPollEvents();
         }
-        logic.stop();
+        //logic.stop();
     }
 
     // initialize post process, quad vao, msaa FB
@@ -88,36 +93,99 @@ public class Scene {
         }}, new boolean[]{ true, true, true, true, true, true });
 
         addObject(new CameraController());
-        addObject(new DirectionalLight(new Vec3(4, 4, 0), new Vec3(0, 0, -(float)Math.PI / 4f * 3f), 5, new Vec3(0, 1, 0)));
-        addObject(new StandartMeshObject(MeshRenders.spaceShipRender,
+        //addObject(new DirectionalLight(new Vec3(4, 4, 0), new Vec3(0, 0, -(float)Math.PI / 4f * 3f), 5, new Vec3(0, 1, 0)));
+        /*addObject(new StandartMeshObject(new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(1, 1, 1),
+                MeshRenders.spaceShipRender,
                 "textures/spaceShip/spaceShipAlbedo.bmp",
                 "textures/spaceShip/spaceShipNormals.bmp",
                 "textures/spaceShip/spaceShipSpecular.bmp"
-        ));
+        ));*/
+        addObject(new TestMeshObject(new Vec3(), new Vec3(), new Vec3(1, 1, 1), MeshRenders.cubemapRender, new Material(Shaders.test)));
 
         isInitialized = true;
+
+        va = glGenVertexArrays();
+        glBindVertexArray(va);
+        buf = glGenBuffers();
+        glBindBuffer(GL_ARRAY_BUFFER, buf);
+        //for (int i = 0; i < vert.length; i++)
+        //    vert[i] = vert[i]*10f;
+        glBufferData(GL_ARRAY_BUFFER, vert, GL_STATIC_DRAW);
     }
 
+    public int va;
+    public int buf;
+    public float[] vert = new float[] {
+            -1.0f, -0.5f, 0.0f,
+            1.0f, -0.5f, 0.0f,
+            -1.0f,  1.0f, 0.0f,
+            -1.0f,  1.0f, 0.0f,
+            1.0f, -0.5f, 0.0f,
+            1.0f,  1.0f, 0.0f,
+    };
+
     public void renderTick(){
-        Mat4 projection = Matrices.perspective((float)Math.toRadians(90), 4f/3f, 0.1f, 100f);
-        Mat4 view = Matrices.lookAt(controller.getPosition(), controller.getBasis().getForward(), controller.getBasis().getUp());
+        glCullFace(GL_FRONT_AND_BACK);
+        glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        deltaTime = System.nanoTime() - lastTime;
+        lastTime = System.nanoTime();
+        if (deltaTime > 1000 * logicUpdateTime){
+            deltaTime = 0;
+            logicTick();
+            logicTicksCount++;
+        }
+
+        Mat4 projection = Matrices.perspective(90f, 4f/3f, 0.1f, 100f);
+        Mat4 view = Matrices.lookAt(controller.getPosition(), controller.getPosition().add(controller.getBasis().getForward()), controller.getBasis().getUp());
         matrices = new SceneMatrices(projection, view);
 
-        lightObjects.forEach(LightSource::renderTick);
+        //lightObjects.forEach(LightSource::renderTick);
         msaaFramebuffer.bind(true);
+
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClearColor(0, 0.5f, 0, 1);
+
         for (SceneObject object : objects) {
             Mat4 model = object.getModelMatrix();
             Mat4 mvp = projection.multiply(view.multiply(model));
             matrices.setModel(model);
             matrices.setMvp(mvp);
             object.renderTick();
+
+            /*
+            Vec4[] res = new Vec4[6];
+            for (int i = 0; i < 6; i++)
+                res[i] = Utils.multiply(mvp, new Vec4(vert[i*3], vert[i*3 + 1], vert[i*3 + 2], 1));
+            return res;
+             */
         }
 
-        renderCubemap();
+        /*glBindVertexArray(va);
+        glUseProgram(Shaders.test.getProgrammeId());
+        Shaders.test.setUniform("mvp", projection.multiply(view).transpose());
+        glDisable(GL_DEPTH_TEST);
+        glEnableVertexAttribArray(0);
+        glBindBuffer(GL_ARRAY_BUFFER, buf);
+        glVertexAttribPointer(
+                0,                  // Àòðèáóò 0. Ïîäðîáíåå îá ýòîì áóäåò ðàññêàçàíî â ÷àñòè, ïîñâÿùåííîé øåéäåðàì.
+                3,                  // Ðàçìåð
+                GL_FLOAT,           // Òèï
+                false,           // Óêàçûâàåò, ÷òî çíà÷åíèÿ íå íîðìàëèçîâàíû
+                0,                  // Øàã
+                0            // Ñìåùåíèå ìàññèâà â áóôåðå
+        );
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+        glDisableVertexAttribArray(0);
+        glEnable(GL_DEPTH_TEST);*/
+
+        //renderCubemap();
+
         glBindFramebuffer(GL_READ_FRAMEBUFFER, msaaFramebuffer.getFramebufferId());
         glBindFramebuffer(GL_DRAW_FRAMEBUFFER, postFramebuffer.getFramebufferId());
         glBlitFramebuffer(0, 0, window.getWidth(), window.getHeight(), 0, 0, window.getWidth(), window.getHeight(), GL_COLOR_BUFFER_BIT, GL_NEAREST);
         msaaFramebuffer.unbind();
+        glPolygonMode( GL_FRONT_AND_BACK, GL_FILL);
         renderPost();
     }
 

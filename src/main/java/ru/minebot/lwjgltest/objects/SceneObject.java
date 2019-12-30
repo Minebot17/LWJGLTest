@@ -26,7 +26,7 @@ public abstract class SceneObject {
     public abstract void logicTick();
 
     public Mat4 getModelMatrix() {
-        return Utils.scale(rotation).multiply(Utils.translate(position)).multiply(Utils.scale(scale));
+        return Utils.translate(position).multiply(Utils.rotation(rotation)).multiply(Utils.scale(scale));
     }
 
     public int getSceneId() {

@@ -64,45 +64,65 @@ public class Mesh {
                 }
                 else if (first == 'f'){
                     String[] splitted = line.replace(' ', '/').split("/");
-                    int[] values = new int[9]; // v vt vn v vt vn v vt vn
-                    for (int i = 0; i < 9; i++)
-                        values[i] = Integer.parseInt(splitted[1 + i]);
+                    if (vn.size() != 0) {
+                        int[] values = new int[9]; // v vt vn v vt vn v vt vn
+                        for (int i = 0; i < 9; i++)
+                            values[i] = Integer.parseInt(splitted[1 + i]);
 
-                    vertices.add(v.get(values[0] - 1));
-                    U.add(vtX.get(values[1] - 1));
-                    V.add(vtY.get(values[1] - 1));
-                    normal.add(vn.get(values[2] - 1));
+                        vertices.add(v.get(values[0] - 1));
+                        U.add(vtX.get(values[1] - 1));
+                        V.add(vtY.get(values[1] - 1));
+                        normal.add(vn.get(values[2] - 1));
 
-                    vertices.add(v.get(values[3] - 1));
-                    U.add(vtX.get(values[4] - 1));
-                    V.add(vtY.get(values[4] - 1));
-                    normal.add(vn.get(values[5] - 1));
+                        vertices.add(v.get(values[3] - 1));
+                        U.add(vtX.get(values[4] - 1));
+                        V.add(vtY.get(values[4] - 1));
+                        normal.add(vn.get(values[5] - 1));
 
-                    vertices.add(v.get(values[6] - 1));
-                    U.add(vtX.get(values[7] - 1));
-                    V.add(vtY.get(values[7] - 1));
-                    normal.add(vn.get(values[8] - 1));
+                        vertices.add(v.get(values[6] - 1));
+                        U.add(vtX.get(values[7] - 1));
+                        V.add(vtY.get(values[7] - 1));
+                        normal.add(vn.get(values[8] - 1));
+                    }
+                    else {
+                        int[] values = new int[6]; // v vt vn v vt vn v vt vn
+                        for (int i = 0; i < 6; i++)
+                            values[i] = Integer.parseInt(splitted[1 + i]);
+
+                        vertices.add(v.get(values[0] - 1));
+                        U.add(vtX.get(values[1] - 1));
+                        V.add(vtY.get(values[1] - 1));
+
+                        vertices.add(v.get(values[2] - 1));
+                        U.add(vtX.get(values[3] - 1));
+                        V.add(vtY.get(values[3] - 1));
+
+                        vertices.add(v.get(values[4] - 1));
+                        U.add(vtX.get(values[5] - 1));
+                        V.add(vtY.get(values[5] - 1));
+                    }
                 }
             }
 
             // build tangents and bitangents
-            for (int i = 0; i < vertices.size(); i += 3){
-                Vec3 deltaPos1 = vertices.get(i + 1).subtract(vertices.get(i));
-                Vec3 deltaPos2 = vertices.get(i + 2).subtract(vertices.get(i));
-                float deltaU1 = U.get(i + 1) - U.get(i);
-                float deltaU2 = U.get(i + 2) - U.get(i);
-                float deltaV1 = V.get(i + 1) - V.get(i);
-                float deltaV2 = V.get(i + 2) - V.get(i);
+            if (normal.size() != 0)
+                for (int i = 0; i < vertices.size(); i += 3){
+                    Vec3 deltaPos1 = vertices.get(i + 1).subtract(vertices.get(i));
+                    Vec3 deltaPos2 = vertices.get(i + 2).subtract(vertices.get(i));
+                    float deltaU1 = U.get(i + 1) - U.get(i);
+                    float deltaU2 = U.get(i + 2) - U.get(i);
+                    float deltaV1 = V.get(i + 1) - V.get(i);
+                    float deltaV2 = V.get(i + 2) - V.get(i);
 
-                float r = 1.0f / (deltaU1 * deltaV2 - deltaV1 * deltaU2);
-                Vec3 tangent = deltaPos1.multiply(deltaV2).subtract(deltaPos2.multiply(deltaV1)).multiply(r);
-                Vec3 bitangent = deltaPos2.multiply(deltaU1).subtract(deltaPos1.multiply(deltaU2)).multiply(r);
+                    float r = 1.0f / (deltaU1 * deltaV2 - deltaV1 * deltaU2);
+                    Vec3 tangent = deltaPos1.multiply(deltaV2).subtract(deltaPos2.multiply(deltaV1)).multiply(r);
+                    Vec3 bitangent = deltaPos2.multiply(deltaU1).subtract(deltaPos1.multiply(deltaU2)).multiply(r);
 
-                for (int j = 0; j < 3; j++){
-                    tangents.add(tangent);
-                    bitangents.add(bitangent);
+                    for (int j = 0; j < 3; j++){
+                        tangents.add(tangent);
+                        bitangents.add(bitangent);
+                    }
                 }
-            }
         }
     }
 }

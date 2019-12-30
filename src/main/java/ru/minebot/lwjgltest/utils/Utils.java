@@ -1,6 +1,7 @@
 package ru.minebot.lwjgltest.utils;
 
 import com.hackoeur.jglm.*;
+import static org.lwjgl.opengl.GL40.*;
 import ru.minebot.lwjgltest.Main;
 
 import javax.imageio.ImageIO;
@@ -20,12 +21,16 @@ public class Utils {
     public static Random rnd = new Random();
 
     public static Vec4 multiply(Mat4 mat, Vec4 vec){
-        float[] a = new float[4];
+        Vec4[] column = new Vec4[4];
         for (int i = 0; i < 4; i++){
-            Vec4 column = mat.getColumn(0);
-            a[i] = column.getX()*vec.getX() + column.getY()*vec.getY() + column.getZ()*vec.getZ() + column.getW()*vec.getW();
+            column[i] = mat.getColumn(i);
         }
-        return new Vec4(a[0], a[1], a[2], a[3]);
+        return new Vec4(
+                column[0].getX()*vec.getX() + column[1].getX()*vec.getY() + column[2].getX()*vec.getZ() + column[3].getX()*vec.getW(),
+                column[0].getY()*vec.getX() + column[1].getY()*vec.getY() + column[2].getY()*vec.getZ() + column[3].getY()*vec.getW(),
+                column[0].getZ()*vec.getX() + column[1].getZ()*vec.getY() + column[2].getZ()*vec.getZ() + column[3].getZ()*vec.getW(),
+                column[0].getW()*vec.getX() + column[1].getW()*vec.getY() + column[2].getW()*vec.getZ() + column[3].getW()*vec.getW()
+        );
     }
 
     public static Vec3 toVec3(Vec4 vec){

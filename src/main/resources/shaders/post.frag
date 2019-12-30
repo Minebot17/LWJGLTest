@@ -15,7 +15,7 @@ void main(){
 		return;
 	}*/
 
-	vec4 original = texture(rendered_texture, uv);
+	vec4 original = texture(rendered_texture, vec2(uv.x, 1.0 - uv.y));
 	vec3 texture_color = pow(original.rgb, vec3(gamma));
 	if (gl_FragCoord.w > 0.99)
 		color = original.rgb;

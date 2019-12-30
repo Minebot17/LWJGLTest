@@ -15,8 +15,8 @@ import static org.lwjgl.system.MemoryStack.stackPush;
 public class CameraController extends SceneObject {
 
     protected long windowId;
-    protected final float rotateSpeed = 0.1f;
-    protected final float flySpeed = 1.0f;
+    protected final float rotateSpeed = 0.00001f;
+    protected final float flySpeed = 0.5f;
     protected VecBasis basis;
 
     @Override
@@ -40,7 +40,7 @@ public class CameraController extends SceneObject {
         glfwGetCursorPos(windowId, dx, dy);
         glfwSetCursorPos(windowId, window.getWidth()/2.0f, window.getHeight()/2.0f);
         rotation = rotation.add(new Vec3(((float)dx.get() - Scene.singleton.getWindow().getWidth() / 2.0f) * Scene.singleton.getLogicUpdateTime() * rotateSpeed, 0, 0));
-        rotation = rotation.add(new Vec3((-(float)dy.get() + Scene.singleton.getWindow().getHeight() / 2.0f) * Scene.singleton.getLogicUpdateTime() * rotateSpeed, 0, 0));
+        rotation = rotation.add(new Vec3(0, (-(float)dy.get()+ Scene.singleton.getWindow().getHeight() / 2.0f) * Scene.singleton.getLogicUpdateTime() * rotateSpeed, 0));
         basis = new VecBasis(rotation);
 
         if (glfwGetKey(windowId, GLFW_KEY_W) == GLFW_PRESS)

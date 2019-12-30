@@ -3,6 +3,8 @@ package ru.minebot.lwjgltest.objects;
 import com.hackoeur.jglm.Mat3;
 import com.hackoeur.jglm.Mat4;
 import static org.lwjgl.opengl.GL40.*;
+
+import com.hackoeur.jglm.Vec3;
 import ru.minebot.lwjgltest.Scene;
 import ru.minebot.lwjgltest.render.Material;
 import ru.minebot.lwjgltest.render.MeshRender;
@@ -16,8 +18,8 @@ import static org.lwjgl.glfw.GLFW.glfwGetTime;
 
 public class StandartMeshObject extends MeshObject {
 
-    public StandartMeshObject(MeshRender meshRender, String albedoPath, String normalPath, String specularPath) {
-        super(meshRender, new Material(Shaders.standart), new HashMap<String, String>(){{
+    public StandartMeshObject(Vec3 position, Vec3 rotation, Vec3 scale, MeshRender meshRender, String albedoPath, String normalPath, String specularPath) {
+        super(position, rotation, scale, meshRender, new Material(Shaders.standart), new HashMap<String, String>(){{
             put("textureSampler", albedoPath);
             put("normalSampler", normalPath);
             put("specularSampler", specularPath);

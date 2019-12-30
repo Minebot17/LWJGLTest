@@ -25,11 +25,11 @@ public class MeshRender {
         glBindVertexArray(vaoId);
 
         vertexBufferId = loadBuffer(Utils.toFloatArray(mesh.vertices));
-        if (mesh.U != null)
+        if (mesh.U != null && mesh.U.size() != 0)
             uvBufferId = loadBuffer(Utils.toFloatArray(mesh.U, mesh.V));
-        if (mesh.normal != null)
+        if (mesh.normal != null && mesh.normal.size() != 0)
             normalBufferId = loadBuffer(Utils.toFloatArray(mesh.normal));
-        if (mesh.tangents != null) {
+        if (mesh.tangents != null && mesh.tangents.size() != 0) {
             tangentBufferId = loadBuffer(Utils.toFloatArray(mesh.tangents));
             bitangentBufferId = loadBuffer(Utils.toFloatArray(mesh.bitangents));
         }
@@ -47,7 +47,7 @@ public class MeshRender {
         enableBuffer(0, vertexBufferId, 3);
         if (uvBufferId != -1)
             enableBuffer(1, uvBufferId, 2);
-        if (uvBufferId != -1)
+        if (normalBufferId != -1)
             enableBuffer(2, normalBufferId, 3);
         if (tangentBufferId != -1) {
             enableBuffer(3, tangentBufferId, 3);
