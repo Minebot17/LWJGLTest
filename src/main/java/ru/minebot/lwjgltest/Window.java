@@ -49,6 +49,7 @@ public class Window {
         glfwMakeContextCurrent(id);
         glfwSwapInterval(1);
         glfwShowWindow(id);
+        glfwSetInputMode(id, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
     }
 
     public long getId() {

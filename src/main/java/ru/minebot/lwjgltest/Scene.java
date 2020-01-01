@@ -2,8 +2,6 @@ package ru.minebot.lwjgltest;
 
 import com.hackoeur.jglm.Mat4;
 import com.hackoeur.jglm.Matrices;
-import com.hackoeur.jglm.Vec3;
-import com.hackoeur.jglm.Vec4;
 import ru.minebot.lwjgltest.objects.*;
 import ru.minebot.lwjgltest.render.*;
 import ru.minebot.lwjgltest.utils.MeshRenders;
@@ -35,6 +33,7 @@ public class Scene {
     private Framebuffer postFramebuffer;
     private FramebufferMSAA msaaFramebuffer;
     private MaterialCubemap cubemapMaterial = new MaterialCubemap();
+    private Material testTextureMaterial = new Material(Shaders.testTexture);
 
     public Scene(Window window){
         singleton = this;
@@ -84,23 +83,24 @@ public class Scene {
         msaaFramebuffer.initialize();
         postFramebuffer.initialize();
         cubemapMaterial.initialize(new HashMap<String, String>(){{
-                    put("skybox", "textures/sky/sky_neg_x.bmp");
-                    put("skybox0", "textures/sky/sky_pos_x.bmp");
-                    put("skybox1", "textures/sky/sky_pos_y.bmp");
-                    put("skybox2", "textures/sky/sky_neg_y.bmp");
-                    put("skybox3", "textures/sky/sky_pos_z.bmp");
-                    put("skybox4", "textures/sky/sky_neg_z.bmp");
+                    put("skybox", "textures/sky/sky_pos_y.png");
+                    put("skybox0", "textures/sky/sky_pos_x.png");
+                    put("skybox1", "textures/sky/sky_neg_x.png");
+                    put("skybox2", "textures/sky/sky_pos_z.png");
+                    put("skybox3", "textures/sky/sky_neg_y.png");
+                    put("skybox4", "textures/sky/sky_neg_z.png");
         }}, new boolean[]{ true, true, true, true, true, true });
+        testTextureMaterial.initialize(new HashMap<String, String>(){{put("texture", "textures/test.png");}}, new boolean[]{true});
 
         addObject(new CameraController());
         //addObject(new DirectionalLight(new Vec3(4, 4, 0), new Vec3(0, 0, -(float)Math.PI / 4f * 3f), 5, new Vec3(0, 1, 0)));
         /*addObject(new StandartMeshObject(new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(1, 1, 1),
                 MeshRenders.spaceShipRender,
-                "textures/spaceShip/spaceShipAlbedo.bmp",
-                "textures/spaceShip/spaceShipNormals.bmp",
-                "textures/spaceShip/spaceShipSpecular.bmp"
+                "textures/spaceShip/spaceShipAlbedo.png",
+                "textures/spaceShip/spaceShipNormals.png",
+                "textures/spaceShip/spaceShipSpecular.png"
         ));*/
-        addObject(new TestMeshObject(new Vec3(), new Vec3(), new Vec3(1, 1, 1), MeshRenders.cubemapRender, new Material(Shaders.test)));
+        //addObject(new TestMeshObject(new Vec3(), new Vec3(), new Vec3(1, 1, 1), MeshRenders.cubemapRender, new Material(Shaders.test)));
 
         isInitialized = true;
 
@@ -108,13 +108,15 @@ public class Scene {
         glBindVertexArray(va);
         buf = glGenBuffers();
         glBindBuffer(GL_ARRAY_BUFFER, buf);
-        //for (int i = 0; i < vert.length; i++)
-        //    vert[i] = vert[i]*10f;
         glBufferData(GL_ARRAY_BUFFER, vert, GL_STATIC_DRAW);
+        bufUv = glGenBuffers();
+        glBindBuffer(GL_ARRAY_BUFFER, bufUv);
+        glBufferData(GL_ARRAY_BUFFER, uvs, GL_STATIC_DRAW);
     }
 
     public int va;
     public int buf;
+    public int bufUv;
     public float[] vert = new float[] {
             -1.0f, -0.5f, 0.0f,
             1.0f, -0.5f, 0.0f,
@@ -123,10 +125,19 @@ public class Scene {
             1.0f, -0.5f, 0.0f,
             1.0f,  1.0f, 0.0f,
     };
+    public float[] uvs = new float[]{
+            0, 1,
+            1, 1,
+            0, 0,
+            0, 0,
+            1, 1,
+            1, 0
+    };
 
     public void renderTick(){
         glCullFace(GL_FRONT_AND_BACK);
-        glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+        glDepthFunc(GL_LEQUAL);
+        //glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         deltaTime = System.nanoTime() - lastTime;
         lastTime = System.nanoTime();
@@ -145,6 +156,7 @@ public class Scene {
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glClearColor(0, 0.5f, 0, 1);
+        renderCubemap();
 
         for (SceneObject object : objects) {
             Mat4 model = object.getModelMatrix();
@@ -161,9 +173,10 @@ public class Scene {
              */
         }
 
-        /*glBindVertexArray(va);
-        glUseProgram(Shaders.test.getProgrammeId());
-        Shaders.test.setUniform("mvp", projection.multiply(view).transpose());
+        glBindVertexArray(va);
+        //glUseProgram(Shaders.test.getProgrammeId());
+        //Shaders.test.setUniform("mvp", projection.multiply(view));
+        testTextureMaterial.bindAll(new HashMap<String, Object>(){{put("mvp", projection.multiply(view));}});
         glDisable(GL_DEPTH_TEST);
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, buf);
@@ -175,27 +188,37 @@ public class Scene {
                 0,                  // Øàã
                 0            // Ñìåùåíèå ìàññèâà â áóôåðå
         );
+        glEnableVertexAttribArray(1);
+        glBindBuffer(GL_ARRAY_BUFFER, bufUv);
+        glVertexAttribPointer(
+                1,                  // Àòðèáóò 0. Ïîäðîáíåå îá ýòîì áóäåò ðàññêàçàíî â ÷àñòè, ïîñâÿùåííîé øåéäåðàì.
+                2,                  // Ðàçìåð
+                GL_FLOAT,           // Òèï
+                false,           // Óêàçûâàåò, ÷òî çíà÷åíèÿ íå íîðìàëèçîâàíû
+                0,                  // Øàã
+                0            // Ñìåùåíèå ìàññèâà â áóôåðå
+        );
         glDrawArrays(GL_TRIANGLES, 0, 6);
         glDisableVertexAttribArray(0);
-        glEnable(GL_DEPTH_TEST);*/
+        glDisableVertexAttribArray(1);
+        glEnable(GL_DEPTH_TEST);
 
-        //renderCubemap();
+        //glPolygonMode( GL_FRONT_AND_BACK, GL_FILL);
 
         glBindFramebuffer(GL_READ_FRAMEBUFFER, msaaFramebuffer.getFramebufferId());
         glBindFramebuffer(GL_DRAW_FRAMEBUFFER, postFramebuffer.getFramebufferId());
         glBlitFramebuffer(0, 0, window.getWidth(), window.getHeight(), 0, 0, window.getWidth(), window.getHeight(), GL_COLOR_BUFFER_BIT, GL_NEAREST);
         msaaFramebuffer.unbind();
-        glPolygonMode( GL_FRONT_AND_BACK, GL_FILL);
         renderPost();
     }
 
     private void renderCubemap(){
         Mat4 skyView = Utils.toMat4(Utils.toMat3(matrices.getView()));
         Mat4 skyMvp = matrices.getProjection().multiply(skyView);
-        glDepthMask(false);
         cubemapMaterial.bindAll(new HashMap<String, Object>(){{ put("mvp", skyMvp); }});
+        glDisable(GL_DEPTH_TEST);
         MeshRenders.cubemapRender.render();
-        glDepthMask(true);
+        glEnable(GL_DEPTH_TEST);
     }
 
     private void renderPost(){

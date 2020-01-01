@@ -2,10 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="627aa9d9-89e3-4b09-88e6-8d8e37c02b82" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/testScreen.vert" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/testTexture.frag" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/testTexture.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LWJGLTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/LWJGLTest.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LWJGLTest.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/LWJGLTest.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LWJGLTest.iws" beforeDir="false" afterPath="$PROJECT_DIR$/LWJGLTest.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Scene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Window.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/CameraController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/CameraController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/Material.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/Material.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/MaterialCubemap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/MaterialCubemap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Shaders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Shaders.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/VecBasis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/VecBasis.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/test.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/test.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/textures/sky/sky_neg_x.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/textures/sky/sky_neg_y.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/textures/sky/sky_neg_z.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/textures/sky/sky_pos_x.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/textures/sky/sky_pos_y.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/textures/sky/sky_pos_z.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/textures/spaceShip/spaceShipAlbedo.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/textures/spaceShip/spaceShipNormals.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/textures/spaceShip/spaceShipSpecular.bmp" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +36,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="GLSL Shader" />
         <option value="Class" />
+        <option value="GLSL Shader" />
       </list>
     </option>
   </component>
@@ -28,7 +48,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/shaders" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/textures" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -36,13 +56,18 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.26382488" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.GLSL" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\serpi\Documents\Java Projects\LWJGLTest\src\main\resources\textures" />
+      <recent name="C:\Users\serpi\Documents\Java Projects\LWJGLTest\src\main\resources\textures\sky" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\serpi\Documents\Java Projects\LWJGLTest\src\main\resources\textures" />
       <recent name="C:\Users\serpi\Documents\Java Projects\LWJGLTest\src\main\resources\shaders" />
       <recent name="C:\Users\serpi\Documents\Java Projects\LWJGLTest\src\main\resources\textures\spaceShip" />
       <recent name="C:\Users\serpi\Documents\Java Projects\LWJGLTest\src\main\resources\textures\sky" />
@@ -105,7 +130,8 @@
       <workItem from="1577416420250" duration="561000" />
       <workItem from="1577440705964" duration="53000" />
       <workItem from="1577683365716" duration="11938000" />
-      <workItem from="1577881170334" duration="4015000" />
+      <workItem from="1577881170334" duration="4313000" />
+      <workItem from="1577896334454" duration="8802000" />
     </task>
     <servers />
   </component>

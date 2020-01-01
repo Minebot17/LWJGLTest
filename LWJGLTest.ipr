@@ -60,6 +60,17 @@
         <root url="jar://$MAVEN_REPOSITORY$/com/hackoeur/jglm/1.0.0/jglm-1.0.0-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Maven: org.l33tlabs.twl:pngdecoder:1.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/l33tlabs/twl/pngdecoder/1.0/pngdecoder-1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/l33tlabs/twl/pngdecoder/1.0/pngdecoder-1.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/l33tlabs/twl/pngdecoder/1.0/pngdecoder-1.0-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: org.lwjgl:lwjgl-assimp:3.2.3">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/org/lwjgl/lwjgl-assimp/3.2.3/lwjgl-assimp-3.2.3.jar!/" />

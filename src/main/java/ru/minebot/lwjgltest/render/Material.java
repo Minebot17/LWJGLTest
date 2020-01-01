@@ -2,14 +2,8 @@ package ru.minebot.lwjgltest.render;
 
 import ru.minebot.lwjgltest.utils.Utils;
 
-import javax.imageio.ImageIO;
-
 import static org.lwjgl.opengl.GL40.*;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.util.HashMap;
 
 public class Material {
@@ -43,20 +37,10 @@ public class Material {
             width = ByteBuffer.wrap(data, 0x12, 4).getInt();
             height = ByteBuffer.wrap(data, 0x16, 4).getInt();*/
 
-            String path = textures.get(name);
-            BufferedImage image = Utils.loadImage(path);
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            try {
-                String[] splitted = path.split("\\.");
-                ImageIO.write(image, splitted[splitted.length - 1], out);
-            } catch (IOException e) {
-                out = null;
-                e.printStackTrace();
-            }
-
+            Utils.DecodedImage image = Utils.loadPNG(textures.get(name));
             int textureID = glGenTextures();
             glBindTexture(GL_TEXTURE_2D, textureID);
-            glTexImage2D(GL_TEXTURE_2D, 0, sRGB[i] ? GL_SRGB : GL_RGB, image.getWidth(), image.getHeight(), 0, GL_BGR, GL_UNSIGNED_BYTE, ByteBuffer.wrap(out.toByteArray()));
+            glTexImage2D(GL_TEXTURE_2D, 0, sRGB[i] ? GL_SRGB : GL_RGB, image.width, image.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.buffer);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
             glGenerateMipmap(GL_TEXTURE_2D);
@@ -93,8 +77,9 @@ public class Material {
 
     // Uniform name -> uniform data, pre-render
     public void bindData(HashMap<String, Object> data) {
-        for (String name : data.keySet())
-            shader.setUniform(name, data.get(name));
+        if (data != null)
+            for (String name : data.keySet())
+                shader.setUniform(name, data.get(name));
     }
 
     public Shader getShader() {

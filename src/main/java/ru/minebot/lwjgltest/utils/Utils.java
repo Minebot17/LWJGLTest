@@ -2,6 +2,8 @@ package ru.minebot.lwjgltest.utils;
 
 import com.hackoeur.jglm.*;
 import static org.lwjgl.opengl.GL40.*;
+
+import de.matthiasmann.twl.utils.PNGDecoder;
 import ru.minebot.lwjgltest.Main;
 
 import javax.imageio.ImageIO;
@@ -10,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,7 +57,7 @@ public class Utils {
                 ((Vec3)mat.getColumn(0)).getX(), ((Vec3)mat.getColumn(0)).getY(), ((Vec3)mat.getColumn(0)).getZ(), 0f,
                 ((Vec3)mat.getColumn(1)).getX(), ((Vec3)mat.getColumn(1)).getY(), ((Vec3)mat.getColumn(1)).getZ(), 0f,
                 ((Vec3)mat.getColumn(2)).getX(), ((Vec3)mat.getColumn(2)).getY(), ((Vec3)mat.getColumn(2)).getZ(), 0f,
-                0f, 0f, 0f, 0f
+                0f, 0f, 0f, 1f
         );
     }
 
@@ -149,12 +152,29 @@ public class Utils {
         return result;
     }
 
-    public static BufferedImage loadImage(String path){
+    public static DecodedImage loadPNG(String path){
         try {
-            return ImageIO.read(getResource(path));
-        } catch (IOException e) {
+            PNGDecoder decoder = new PNGDecoder(getResource(path));
+            ByteBuffer buffer = ByteBuffer.allocateDirect(4 * decoder.getWidth() * decoder.getHeight());
+            decoder.decode(buffer, decoder.getWidth() * 4, PNGDecoder.Format.RGBA);
+            buffer.flip();
+            return new DecodedImage(decoder.getWidth(), decoder.getHeight(), buffer);
+        }
+        catch (IOException e){
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public static class DecodedImage {
+        public int width;
+        public int height;
+        public ByteBuffer buffer;
+
+        public DecodedImage(int width, int height, ByteBuffer buffer) {
+            this.width = width;
+            this.height = height;
+            this.buffer = buffer;
         }
     }
 }

@@ -42,8 +42,8 @@ public class CameraController extends SceneObject {
         float dx = (float)dxBuf.get() - Scene.singleton.getWindow().getWidth() / 2.0f;
         float dy = (float)dyBuf.get() - Scene.singleton.getWindow().getHeight() / 2.0f;
 
-        rotation = rotation.add(new Vec3(0, -dx * Scene.singleton.getLogicUpdateTime() * rotateSpeed, 0));
         rotation = rotation.add(new Vec3( 0, 0, -dy * Scene.singleton.getLogicUpdateTime() * rotateSpeed));
+        rotation = rotation.add(new Vec3(0, -dx * Scene.singleton.getLogicUpdateTime() * rotateSpeed, 0));
         basis = new Vec2Basis(rotation);
 
         if (glfwGetKey(windowId, GLFW_KEY_W) == GLFW_PRESS)

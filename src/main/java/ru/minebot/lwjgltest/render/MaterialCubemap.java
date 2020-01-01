@@ -3,11 +3,6 @@ package ru.minebot.lwjgltest.render;
 import ru.minebot.lwjgltest.utils.Shaders;
 import ru.minebot.lwjgltest.utils.Utils;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.util.HashMap;
 
 import static org.lwjgl.opengl.GL40.*;
@@ -28,18 +23,8 @@ public class MaterialCubemap extends Material {
         glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
 
         for (String name : textures.keySet()) {
-            String path = textures.get(name);
-            BufferedImage image = Utils.loadImage(path);
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            try {
-                String[] splitted = path.split("\\.");
-                ImageIO.write(image, splitted[splitted.length - 1], out);
-            } catch (IOException e) {
-                out = null;
-                e.printStackTrace();
-            }
-
-            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, sRGB[i] ? GL_SRGB : GL_RGB, image.getWidth(), image.getHeight(), 0, GL_BGR, GL_UNSIGNED_BYTE, ByteBuffer.wrap(out.toByteArray()));
+            Utils.DecodedImage image = Utils.loadPNG(textures.get(name));
+            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, sRGB[i] ? GL_SRGB : GL_RGB, image.width, image.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.buffer);
             i++;
         }
 
