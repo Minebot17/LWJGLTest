@@ -33,6 +33,10 @@ public class Utils {
         );
     }
 
+    public static Vec3 multiply(Mat4 mat, Vec3 vec){
+        return toVec3(multiply(mat,new Vec4(vec, 1)));
+    }
+
     public static Vec3 toVec3(Vec4 vec){
         return new Vec3(vec.getX(), vec.getY(), vec.getZ());
     }

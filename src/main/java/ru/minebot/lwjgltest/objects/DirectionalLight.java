@@ -7,7 +7,7 @@ import ru.minebot.lwjgltest.Scene;
 import ru.minebot.lwjgltest.render.FramebufferShadow;
 import ru.minebot.lwjgltest.render.Material;
 import ru.minebot.lwjgltest.utils.Shaders;
-import ru.minebot.lwjgltest.utils.VecBasis;
+import ru.minebot.lwjgltest.utils.Vec2Basis;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +30,7 @@ public class DirectionalLight extends LightSource {
 
     @Override
     public void renderTick() {
-        VecBasis basis = new VecBasis(rotation);
+        Vec2Basis basis = new Vec2Basis(rotation);
         Mat4 shadowProjection = Matrices.ortho(-10, 10, -10, 10, -5, 8);
         Mat4 shadowView = Matrices.lookAt(position, basis.getForward(), basis.getUp());
         List<SceneObject> objects = Scene.singleton.getObjects();

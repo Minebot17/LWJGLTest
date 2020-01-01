@@ -4,7 +4,7 @@ import com.hackoeur.jglm.Vec3;
 import org.lwjgl.system.MemoryStack;
 import ru.minebot.lwjgltest.Scene;
 import ru.minebot.lwjgltest.Window;
-import ru.minebot.lwjgltest.utils.VecBasis;
+import ru.minebot.lwjgltest.utils.Vec2Basis;
 
 import java.nio.DoubleBuffer;
 
@@ -17,7 +17,7 @@ public class CameraController extends SceneObject {
     protected long windowId;
     protected final float rotateSpeed = 0.00001f;
     protected final float flySpeed = 0.5f;
-    protected VecBasis basis;
+    protected Vec2Basis basis;
 
     @Override
     public void initialize() {
@@ -34,14 +34,17 @@ public class CameraController extends SceneObject {
     public void logicTick() {
         Window window = Scene.singleton.getWindow();
         MemoryStack stack = stackPush();
-        DoubleBuffer dx = stack.mallocDouble(1);
-        DoubleBuffer dy = stack.mallocDouble(1);
+        DoubleBuffer dxBuf = stack.mallocDouble(1);
+        DoubleBuffer dyBuf = stack.mallocDouble(1);
 
-        glfwGetCursorPos(windowId, dx, dy);
+        glfwGetCursorPos(windowId, dxBuf, dyBuf);
         glfwSetCursorPos(windowId, window.getWidth()/2.0f, window.getHeight()/2.0f);
-        rotation = rotation.add(new Vec3(((float)dx.get() - Scene.singleton.getWindow().getWidth() / 2.0f) * Scene.singleton.getLogicUpdateTime() * rotateSpeed, 0, 0));
-        rotation = rotation.add(new Vec3(0, (-(float)dy.get()+ Scene.singleton.getWindow().getHeight() / 2.0f) * Scene.singleton.getLogicUpdateTime() * rotateSpeed, 0));
-        basis = new VecBasis(rotation);
+        float dx = (float)dxBuf.get() - Scene.singleton.getWindow().getWidth() / 2.0f;
+        float dy = (float)dyBuf.get() - Scene.singleton.getWindow().getHeight() / 2.0f;
+
+        rotation = rotation.add(new Vec3(0, -dx * Scene.singleton.getLogicUpdateTime() * rotateSpeed, 0));
+        rotation = rotation.add(new Vec3( 0, 0, -dy * Scene.singleton.getLogicUpdateTime() * rotateSpeed));
+        basis = new Vec2Basis(rotation);
 
         if (glfwGetKey(windowId, GLFW_KEY_W) == GLFW_PRESS)
             position = position.add(basis.getForward().multiply(flySpeed));
@@ -57,7 +60,7 @@ public class CameraController extends SceneObject {
             position = position.add(basis.getUp().multiply(flySpeed));
     }
 
-    public VecBasis getBasis() {
+    public Vec2Basis getBasis() {
         return basis;
     }
 }
