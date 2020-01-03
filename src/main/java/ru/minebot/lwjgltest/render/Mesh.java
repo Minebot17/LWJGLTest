@@ -71,17 +71,17 @@ public class Mesh {
 
                         vertices.add(v.get(values[0] - 1));
                         U.add(vtX.get(values[1] - 1));
-                        V.add(vtY.get(values[1] - 1));
+                        V.add(1f - vtY.get(values[1] - 1));
                         normal.add(vn.get(values[2] - 1));
 
                         vertices.add(v.get(values[3] - 1));
                         U.add(vtX.get(values[4] - 1));
-                        V.add(vtY.get(values[4] - 1));
+                        V.add(1f - vtY.get(values[4] - 1));
                         normal.add(vn.get(values[5] - 1));
 
                         vertices.add(v.get(values[6] - 1));
                         U.add(vtX.get(values[7] - 1));
-                        V.add(vtY.get(values[7] - 1));
+                        V.add(1f - vtY.get(values[7] - 1));
                         normal.add(vn.get(values[8] - 1));
                     }
                     else {
@@ -91,15 +91,15 @@ public class Mesh {
 
                         vertices.add(v.get(values[0] - 1));
                         U.add(vtX.get(values[1] - 1));
-                        V.add(vtY.get(values[1] - 1));
+                        V.add(1f - vtY.get(values[1] - 1));
 
                         vertices.add(v.get(values[2] - 1));
                         U.add(vtX.get(values[3] - 1));
-                        V.add(vtY.get(values[3] - 1));
+                        V.add(1f - vtY.get(values[3] - 1));
 
                         vertices.add(v.get(values[4] - 1));
                         U.add(vtX.get(values[5] - 1));
-                        V.add(vtY.get(values[5] - 1));
+                        V.add(1f - vtY.get(values[5] - 1));
                     }
                 }
             }

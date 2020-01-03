@@ -44,7 +44,7 @@ public class CameraController extends SceneObject {
 
         rotation = rotation.add(new Vec3( 0, 0, -dy * Scene.singleton.getLogicUpdateTime() * rotateSpeed));
         rotation = rotation.add(new Vec3(0, -dx * Scene.singleton.getLogicUpdateTime() * rotateSpeed, 0));
-        basis = new Vec2Basis(rotation);
+        basis = new Vec2Basis(rotation.getY(), rotation.getZ());
 
         if (glfwGetKey(windowId, GLFW_KEY_W) == GLFW_PRESS)
             position = position.add(basis.getForward().multiply(flySpeed));

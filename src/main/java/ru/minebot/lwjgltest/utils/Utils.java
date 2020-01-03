@@ -80,7 +80,7 @@ public class Utils {
     }
 
     public static Mat4 rotation(Vec3 euler){
-        return Matrices.rotate(euler.getZ(), new Vec3(0, 0, 1)).multiply(Matrices.rotate(euler.getX(), new Vec3(1, 0, 0)).multiply(Matrices.rotate(euler.getY(), new Vec3(0, 1, 0))));
+        return Matrices.rotate(euler.getY(), new Vec3(0, 1, 0)).multiply(Matrices.rotate(euler.getX(), new Vec3(1, 0, 0)).multiply(Matrices.rotate(euler.getZ(), new Vec3(0, 0, 1))));
     }
 
     public static Mat4 rotation(Vec3 axis, float angle){
@@ -90,7 +90,7 @@ public class Utils {
     public static Vec3 quaternionToEuler(Vec3 axis, float angle){
         double y = Math.asin(2f*(angle*axis.getX() - axis.getZ()*axis.getY()));
         double x, z;
-        if (Math.abs(Math.abs(y) - Math.PI/2f) < 0.005f){
+        if (Math.abs(Math.abs(y) - Math.PI/2f) < 0.005f || y != y){
             x = Math.atan(axis.getZ()/angle);
             z = 0f;
         }
@@ -164,6 +164,12 @@ public class Utils {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static Vec3 getEulerFromDirection(Vec3 D){
+        double angleZ = Math.atan2(D.getY(), D.getX());
+        double angleY = Math.atan2(D.getZ(), D.getX());
+        return new Vec3((float) 0, (float) -angleY, (float) angleZ);
     }
 
     public static class DecodedImage {

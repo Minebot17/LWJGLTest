@@ -29,10 +29,6 @@ public class StandartMeshObject extends MeshObject {
     @Override
     public void renderTick() {
         LightSource light = Scene.singleton.getLightObjects().get(0);
-        glActiveTexture(GL_TEXTURE10);
-        glBindTexture(GL_TEXTURE_2D, light.getShadowTexture());
-        material.getShader().setUniform("shadowSampler", 10);
-
         SceneMatrices matrices = Scene.singleton.getMatrices();
         Mat3 mat3 = Utils.toMat3(matrices.getModel().multiply(matrices.getView()));
         Mat4 depthBiasMVP = LightSource.biasMatrix.multiply(light.getShadowMVP());
@@ -45,14 +41,17 @@ public class StandartMeshObject extends MeshObject {
             put("lightDirection_worldspace", light.getPosition());
             put("depthBiasMVP", depthBiasMVP);
             put("lightColor", light.getLightColor());
-            put("lightPower", light.getLightColor());
+            put("lightPower", light.getLightPower());
             put("time", glfwGetTime());
         }});
+        glActiveTexture(GL_TEXTURE3);
+        glBindTexture(GL_TEXTURE_2D, light.getShadowTexture());
+        material.getShader().setUniform("shadowSampler", 3);
         meshRender.render();
     }
 
     @Override
     public void logicTick() {
-
+        rotation = rotation.add(new Vec3(0, 0.01f, 0));
     }
 }

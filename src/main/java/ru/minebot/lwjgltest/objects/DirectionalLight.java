@@ -12,9 +12,14 @@ import ru.minebot.lwjgltest.utils.Vec2Basis;
 import java.util.HashMap;
 import java.util.List;
 
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
+import static org.lwjgl.opengl.GL11.glBindTexture;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE10;
+import static org.lwjgl.opengl.GL13.glActiveTexture;
+
 public class DirectionalLight extends LightSource {
 
-    protected FramebufferShadow shadowFramebuffer = new FramebufferShadow(Scene.singleton.getWindow(), 1024);
+    protected FramebufferShadow shadowFramebuffer = new FramebufferShadow(Scene.singleton.getWindow(), 2048);
     protected Material shadowMaterial = new Material(Shaders.shadowMap);
     protected Mat4 shadowMvp;
 
@@ -30,14 +35,15 @@ public class DirectionalLight extends LightSource {
 
     @Override
     public void renderTick() {
-        Vec2Basis basis = new Vec2Basis(rotation);
+        Vec2Basis basis = new Vec2Basis(rotation.getY(), rotation.getZ());
         Mat4 shadowProjection = Matrices.ortho(-10, 10, -10, 10, -5, 8);
-        Mat4 shadowView = Matrices.lookAt(position, basis.getForward(), basis.getUp());
+        Mat4 shadowView = Matrices.lookAt(position, position.add(basis.getForward()), basis.getUp());
         List<SceneObject> objects = Scene.singleton.getObjects();
 
         shadowFramebuffer.bind(true);
         shadowMaterial.bind();
         shadowMaterial.bindTextures();
+
         for (SceneObject object : objects) {
             if (!(object instanceof MeshObject))
                 continue;

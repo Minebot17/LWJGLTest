@@ -48,7 +48,7 @@ void main(){
 	vec3 materialColor = texture(textureSampler, fs_in.uv).rgb;
 	vec3 specularColor = texture(specularSampler, fs_in.uv).rgb;
 	color = vec3(0.025, 0.025, 0.025) * materialColor + // ambient
-			materialColor * lightColor * lightPower * visibility * cosTheta + // diffuse
+			materialColor * lightColor * lightPower * visibility/* * cosTheta */+ // diffuse
 			specularColor * lightColor * lightPower * visibility * pow(cosAlpha, 5); // specular
 
 	//float a = texture(shadowSampler, shadowCoord.xy).r;

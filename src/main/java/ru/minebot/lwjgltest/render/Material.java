@@ -85,4 +85,8 @@ public class Material {
     public Shader getShader() {
         return shader;
     }
+
+    public void addTexture(String name, int textureId){
+        textures.put(name, textureId);
+    }
 }

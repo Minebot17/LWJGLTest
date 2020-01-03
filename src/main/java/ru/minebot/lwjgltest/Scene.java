@@ -2,6 +2,7 @@ package ru.minebot.lwjgltest;
 
 import com.hackoeur.jglm.Mat4;
 import com.hackoeur.jglm.Matrices;
+import com.hackoeur.jglm.Vec3;
 import ru.minebot.lwjgltest.objects.*;
 import ru.minebot.lwjgltest.render.*;
 import ru.minebot.lwjgltest.utils.MeshRenders;
@@ -93,13 +94,13 @@ public class Scene {
         testTextureMaterial.initialize(new HashMap<String, String>(){{put("texture", "textures/test.png");}}, new boolean[]{true});
 
         addObject(new CameraController());
-        //addObject(new DirectionalLight(new Vec3(4, 4, 0), new Vec3(0, 0, -(float)Math.PI / 4f * 3f), 5, new Vec3(0, 1, 0)));
-        /*addObject(new StandartMeshObject(new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(1, 1, 1),
+        addObject(new DirectionalLight(new Vec3(3, 2, 0), new Vec3(-3, -2, 0).getUnitVector(), 2, new Vec3(1, 1, 1)));
+        addObject(new StandartMeshObject(new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(1, 1, 1),
                 MeshRenders.spaceShipRender,
                 "textures/spaceShip/spaceShipAlbedo.png",
                 "textures/spaceShip/spaceShipNormals.png",
                 "textures/spaceShip/spaceShipSpecular.png"
-        ));*/
+        ));
         //addObject(new TestMeshObject(new Vec3(), new Vec3(), new Vec3(1, 1, 1), MeshRenders.cubemapRender, new Material(Shaders.test)));
 
         isInitialized = true;
@@ -151,7 +152,7 @@ public class Scene {
         Mat4 view = Matrices.lookAt(controller.getPosition(), controller.getPosition().add(controller.getBasis().getForward()), controller.getBasis().getUp());
         matrices = new SceneMatrices(projection, view);
 
-        //lightObjects.forEach(LightSource::renderTick);
+        lightObjects.forEach(LightSource::renderTick);
         msaaFramebuffer.bind(true);
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -173,7 +174,7 @@ public class Scene {
              */
         }
 
-        glBindVertexArray(va);
+        /*glBindVertexArray(va);
         //glUseProgram(Shaders.test.getProgrammeId());
         //Shaders.test.setUniform("mvp", projection.multiply(view));
         testTextureMaterial.bindAll(new HashMap<String, Object>(){{put("mvp", projection.multiply(view));}});
@@ -201,7 +202,7 @@ public class Scene {
         glDrawArrays(GL_TRIANGLES, 0, 6);
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
-        glEnable(GL_DEPTH_TEST);
+        glEnable(GL_DEPTH_TEST);*/
 
         //glPolygonMode( GL_FRONT_AND_BACK, GL_FILL);
 
@@ -224,6 +225,11 @@ public class Scene {
     private void renderPost(){
         glDisable(GL_DEPTH_TEST);
         glUseProgram(Shaders.post.getProgrammeId());
+
+        LightSource light = Scene.singleton.getLightObjects().get(0);
+        glActiveTexture(GL_TEXTURE10);
+        glBindTexture(GL_TEXTURE_2D, light.getShadowTexture());
+        Shaders.post.setUniform("shadow_texture", 10);
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, postFramebuffer.getTextureId());

@@ -2,6 +2,7 @@ package ru.minebot.lwjgltest.objects;
 
 import com.hackoeur.jglm.Mat4;
 import com.hackoeur.jglm.Vec3;
+import ru.minebot.lwjgltest.utils.Utils;
 
 public abstract class LightSource extends SceneObject {
 
@@ -12,10 +13,10 @@ public abstract class LightSource extends SceneObject {
             0.0f, 0.5f, 0.0f, 0.0f,
             0.0f, 0.0f, 0.5f, 0.0f,
             0.5f, 0.5f, 0.5f, 1.0f
-    }).transpose();
+    });
 
     public LightSource(Vec3 position, Vec3 lookVector, float lightPower, Vec3 lightColor) {
-        super(position, lookVector, new Vec3(1, 1, 1));
+        super(position, Utils.getEulerFromDirection(lookVector), new Vec3(1, 1, 1));
         this.lightPower = lightPower;
         this.lightColor = lightColor;
     }

@@ -2,30 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="627aa9d9-89e3-4b09-88e6-8d8e37c02b82" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/testScreen.vert" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/testTexture.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/testTexture.vert" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ru/minebot/lwjgltest/UtilsTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LWJGLTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/LWJGLTest.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LWJGLTest.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/LWJGLTest.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LWJGLTest.iws" beforeDir="false" afterPath="$PROJECT_DIR$/LWJGLTest.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Scene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Window.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/CameraController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/CameraController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/DirectionalLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/DirectionalLight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/LightSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/LightSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/StandartMeshObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/StandartMeshObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/Material.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/Material.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/MaterialCubemap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/MaterialCubemap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Shaders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Shaders.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/Mesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/Mesh.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/test.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/test.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/textures/sky/sky_neg_x.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/textures/sky/sky_neg_y.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/textures/sky/sky_neg_z.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/textures/sky/sky_pos_x.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/textures/sky/sky_pos_y.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/textures/sky/sky_pos_z.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/textures/spaceShip/spaceShipAlbedo.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/textures/spaceShip/spaceShipNormals.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/textures/spaceShip/spaceShipSpecular.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Vec2Basis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Vec2Basis.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/post.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/post.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/standart.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/standart.frag" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,8 +28,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="GLSL Shader" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -86,7 +78,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="ru.minebot.lwjgltest.Main" />
       <module name="LWJGLTest" />
@@ -95,6 +87,43 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="UtilsTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LWJGLTest" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.minebot.lwjgltest.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.minebot.lwjgltest" />
+      <option name="MAIN_CLASS_NAME" value="ru.minebot.lwjgltest.UtilsTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UtilsTests.testRotation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LWJGLTest" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.minebot.lwjgltest.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.minebot.lwjgltest" />
+      <option name="MAIN_CLASS_NAME" value="ru.minebot.lwjgltest.UtilsTests" />
+      <option name="METHOD_NAME" value="testRotation" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.UtilsTests" />
+        <item itemvalue="JUnit.UtilsTests.testRotation" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -131,7 +160,11 @@
       <workItem from="1577440705964" duration="53000" />
       <workItem from="1577683365716" duration="11938000" />
       <workItem from="1577881170334" duration="4313000" />
-      <workItem from="1577896334454" duration="8802000" />
+      <workItem from="1577896334454" duration="10564000" />
+      <workItem from="1577950046355" duration="4454000" />
+      <workItem from="1577972805964" duration="6601000" />
+      <workItem from="1577986131856" duration="2409000" />
+      <workItem from="1578031127104" duration="5042000" />
     </task>
     <servers />
   </component>
