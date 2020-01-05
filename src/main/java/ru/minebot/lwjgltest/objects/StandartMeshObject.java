@@ -38,7 +38,7 @@ public class StandartMeshObject extends MeshObject {
             put("model", matrices.getModel());
             put("view", matrices.getView());
             put("mv3x3", mat3);
-            put("lightDirection_worldspace", light.getPosition());
+            put("lightPosition_worldspace", light.getPosition());
             put("depthBiasMVP", depthBiasMVP);
             put("lightColor", light.getLightColor());
             put("lightPower", light.getLightPower());

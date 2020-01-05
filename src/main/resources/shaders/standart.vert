@@ -9,7 +9,7 @@ uniform mat4 mvp;
 uniform mat4 model;
 uniform mat4 view;
 uniform mat3 mv3x3;
-uniform vec3 lightDirection_worldspace;
+uniform vec3 lightPosition_worldspace;
 uniform mat4 depthBiasMVP;
 
 out VS_OUT {
@@ -30,7 +30,7 @@ void main(){
 
 	// Vector that goes from the vertex to the camera, in camera space.
 	vec3 vertexPosition_cameraspace = (view * model * vec4(vertexPosition_modelspace, 1)).xyz;
-	vs_out.lightDirection_cameraspace = (view * vec4(lightDirection_worldspace, 0)).xyz;
+	vs_out.lightDirection_cameraspace = (view * vec4(lightPosition_worldspace - (model * vec4(vertexPosition_modelspace, 1)).xyz, 0)).xyz;
 
 	vs_out.eyeDirection_cameraspace = -vertexPosition_cameraspace;
 
