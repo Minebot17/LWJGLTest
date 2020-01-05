@@ -95,6 +95,7 @@ public class Scene {
 
         addObject(new CameraController());
         addObject(new DirectionalLight(new Vec3(3, 2, 0), new Vec3(-3, -2, 0).getUnitVector(), 2, new Vec3(1, 1, 1)));
+        //addObject(new DirectionalLight(new Vec3(3, 2, 0), new Vec3(-3, -2, 0).getUnitVector(), 2, new Vec3(1, 1, 1)));
         addObject(new StandartMeshObject(new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(1, 1, 1),
                 MeshRenders.spaceShipRender,
                 "textures/spaceShip/spaceShipAlbedo.png",

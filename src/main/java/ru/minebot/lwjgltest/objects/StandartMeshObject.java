@@ -13,6 +13,7 @@ import ru.minebot.lwjgltest.utils.Shaders;
 import ru.minebot.lwjgltest.utils.Utils;
 
 import java.util.HashMap;
+import java.util.List;
 
 import static org.lwjgl.glfw.GLFW.glfwGetTime;
 
@@ -28,25 +29,39 @@ public class StandartMeshObject extends MeshObject {
 
     @Override
     public void renderTick() {
-        LightSource light = Scene.singleton.getLightObjects().get(0);
         SceneMatrices matrices = Scene.singleton.getMatrices();
         Mat3 mat3 = Utils.toMat3(matrices.getModel().multiply(matrices.getView()));
-        Mat4 depthBiasMVP = LightSource.biasMatrix.multiply(light.getShadowMVP());
+        List<LightSource> lights = Scene.singleton.getLightObjects();
+
+        Vec3[] positions = new Vec3[lights.size()];
+        Mat4[] depthBiasMVP = new Mat4[lights.size()];
+        Vec3[] colors = new Vec3[lights.size()];
+        float[] powers = new float[lights.size()];
+
+        for (int i = 0; i < lights.size(); i++) {
+            positions[i] = lights.get(i).getPosition();
+            depthBiasMVP[i] = LightSource.biasMatrix.multiply(lights.get(i).getShadowMVP());
+            colors[i] = lights.get(i).getLightColor();
+            powers[i] = lights.get(i).getLightPower();
+        }
 
         material.bindAll(new HashMap<String, Object>(){{
             put("mvp", matrices.getMvp());
             put("model", matrices.getModel());
             put("view", matrices.getView());
             put("mv3x3", mat3);
-            put("lightPosition_worldspace", light.getPosition());
+            put("lightPosition_worldspace", positions);
             put("depthBiasMVP", depthBiasMVP);
-            put("lightColor", light.getLightColor());
-            put("lightPower", light.getLightPower());
+            put("lightColor", colors);
+            put("lightPower", powers);
             put("time", glfwGetTime());
+            put("lightCount", lights.size());
         }});
-        glActiveTexture(GL_TEXTURE3);
-        glBindTexture(GL_TEXTURE_2D, light.getShadowTexture());
-        material.getShader().setUniform("shadowSampler", 3);
+        for (int i = 0; i < lights.size(); i++) {
+            glActiveTexture(GL_TEXTURE3 + i);
+            glBindTexture(GL_TEXTURE_2D, lights.get(i).getShadowTexture());
+            material.getShader().setUniform("shadowSampler[" + i + "]", 3 + i);
+        }
         meshRender.render();
     }
 

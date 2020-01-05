@@ -81,12 +81,43 @@ public class Shader {
             glUniformMatrix3fv(location, false, ((Mat3)value).getBuffer().array());
         else if (value instanceof Mat4)
             glUniformMatrix4fv(location, false, ((Mat4)value).getBuffer().array());
-        else if (value instanceof int[])
-            glUniform1iv(location, (int[])value);
-        else if (value instanceof float[])
-            glUniform1fv(location, (float[])value);
-        else if (value instanceof double[])
-            glUniform1dv(location, (double[])value);
+        else {
+            if (value instanceof int[])
+                glUniform1iv(location, (int[]) value);
+            else if (value instanceof float[])
+                glUniform1fv(location, (float[]) value);
+            else if (value instanceof double[])
+                glUniform1dv(location, (double[]) value);
+            else if (value instanceof Vec3[]) {
+                Vec3[] array = (Vec3[]) value;
+                FloatBuffer buffer = FloatBuffer.allocate(3 * array.length);
+                for (Vec3 vec3 : array)
+                    buffer.put(new float[]{vec3.getX(), vec3.getY(), vec3.getZ()});
+                buffer.flip();
+                glUniform3fv(location, buffer.array());
+            } else if (value instanceof Vec4[]) {
+                Vec4[] array = (Vec4[]) value;
+                FloatBuffer buffer = FloatBuffer.allocate(4 * array.length);
+                for (Vec4 vec4 : array)
+                    buffer.put(new float[]{vec4.getX(), vec4.getY(), vec4.getZ(), vec4.getW()});
+                buffer.flip();
+                glUniform4fv(location, buffer.array());
+            } else if (value instanceof Mat3[]) {
+                Mat3[] array = (Mat3[]) value;
+                FloatBuffer buffer = FloatBuffer.allocate(9 * array.length);
+                for (Mat3 mat3 : array)
+                    buffer.put((FloatBuffer) mat3.getBuffer().flip());
+                buffer.flip();
+                glUniformMatrix3fv(location, false, buffer.array());
+            } else if (value instanceof Mat4[]) {
+                Mat4[] array = (Mat4[]) value;
+                FloatBuffer buffer = FloatBuffer.allocate(16 * array.length);
+                for (Mat4 mat4 : array)
+                    buffer.put((FloatBuffer) mat4.getBuffer().flip());
+                buffer.flip();
+                glUniformMatrix4fv(location, false, buffer.array());
+            }
+        }
     }
 
     public int getProgrammeId() {

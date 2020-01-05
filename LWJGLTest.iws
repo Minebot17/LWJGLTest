@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="627aa9d9-89e3-4b09-88e6-8d8e37c02b82" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/LWJGLTest.iws" beforeDir="false" afterPath="$PROJECT_DIR$/LWJGLTest.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Scene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/StandartMeshObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/StandartMeshObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/Shader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/Shader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/standart.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/standart.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/standart.geom" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/standart.geom" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/standart.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/standart.vert" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -154,6 +158,7 @@
       <workItem from="1578031127104" duration="5338000" />
       <workItem from="1578051981352" duration="225000" />
       <workItem from="1578158265743" duration="2389000" />
+      <workItem from="1578205336318" duration="8668000" />
     </task>
     <servers />
   </component>
