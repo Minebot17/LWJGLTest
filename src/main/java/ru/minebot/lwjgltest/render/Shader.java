@@ -106,14 +106,14 @@ public class Shader {
                 Mat3[] array = (Mat3[]) value;
                 FloatBuffer buffer = FloatBuffer.allocate(9 * array.length);
                 for (Mat3 mat3 : array)
-                    buffer.put((FloatBuffer) mat3.getBuffer().flip());
+                    buffer.put(mat3.getBuffer().array());
                 buffer.flip();
                 glUniformMatrix3fv(location, false, buffer.array());
             } else if (value instanceof Mat4[]) {
                 Mat4[] array = (Mat4[]) value;
                 FloatBuffer buffer = FloatBuffer.allocate(16 * array.length);
                 for (Mat4 mat4 : array)
-                    buffer.put((FloatBuffer) mat4.getBuffer().flip());
+                    buffer.put(mat4.getBuffer().array());
                 buffer.flip();
                 glUniformMatrix4fv(location, false, buffer.array());
             }

@@ -27,7 +27,7 @@ uniform float time;
 
 void main() {    
 	for (int i = 0; i < 3; i++) {
-		gl_Position = gl_in[i].gl_Position; 
+		gl_Position = gl_in[i].gl_Position;
 		gs_out.fragmentColor = gs_in[i].fragmentColor;
 		gs_out.uv = gs_in[i].uv;
 		gs_out.normal_cameraspace = gs_in[i].normal_cameraspace;

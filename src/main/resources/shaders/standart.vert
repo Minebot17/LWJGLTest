@@ -12,7 +12,7 @@ uniform mat4 view;
 uniform mat3 mv3x3;
 uniform vec3 lightPosition_worldspace[lightMaxCount];
 uniform mat4 depthBiasMVP[lightMaxCount];
-uniform int lightcount;
+uniform int lightCount;
 
 out VS_OUT {
 	vec3 fragmentColor;
@@ -31,7 +31,7 @@ void main(){
 	// Vector that goes from the vertex to the camera, in camera space.
 	vec3 vertexPosition_cameraspace = (view * model * vec4(vertexPosition_modelspace, 1)).xyz;
 	vec3 lightDirection_cameraspace[lightMaxCount];
-	for (int i = 0; i < lightcount; i++)
+	for (int i = 0; i < lightCount; i++)
 		lightDirection_cameraspace[i] = (view * vec4(lightPosition_worldspace[i] - (model * vec4(vertexPosition_modelspace, 1)).xyz, 0)).xyz;
 
 	vec3 eyeDirection_cameraspace = -vertexPosition_cameraspace;
@@ -49,11 +49,11 @@ void main(){
         vertexNormal_cameraspace
     )); // You can use dot products instead of building this matrix and transposing it. See References for details.
 
-	for (int i = 0; i < lightcount; i++)
+	for (int i = 0; i < lightCount; i++)
 		vs_out.lightDirection_tangentspace[i] = vs_out.tbn * lightDirection_cameraspace[i];
 
     vs_out.eyeDirection_tangentspace =  vs_out.tbn * eyeDirection_cameraspace;
 
-	for (int i = 0; i < lightcount; i++)
+	for (int i = 0; i < lightCount; i++)
 		vs_out.shadowCoord[i] = depthBiasMVP[i] * vec4(vertexPosition_modelspace,1);
 }

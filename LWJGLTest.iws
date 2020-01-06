@@ -2,29 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="627aa9d9-89e3-4b09-88e6-8d8e37c02b82" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/hs_err_pid12780.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/hs_err_pid14056.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/hs_err_pid14876.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/hs_err_pid1596.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/hs_err_pid19596.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/hs_err_pid20644.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/hs_err_pid23660.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/hs_err_pid24192.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/hs_err_pid2476.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/hs_err_pid27060.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/hs_err_pid2880.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/hs_err_pid28956.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/hs_err_pid29064.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/hs_err_pid29168.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/hs_err_pid29944.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/hs_err_pid30480.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/hs_err_pid30904.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/hs_err_pid31720.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/hs_err_pid32188.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/hs_err_pid9376.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/hs_err_pid9640.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/hs_err_pid9716.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LWJGLTest.iws" beforeDir="false" afterPath="$PROJECT_DIR$/LWJGLTest.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/Shader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/render/Shader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/standart.geom" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/standart.geom" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/standart.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/standart.vert" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -175,7 +156,8 @@
       <workItem from="1578051981352" duration="225000" />
       <workItem from="1578158265743" duration="2389000" />
       <workItem from="1578205336318" duration="8668000" />
-      <workItem from="1578214441448" duration="100000" />
+      <workItem from="1578214441448" duration="126000" />
+      <workItem from="1578300341848" duration="3235000" />
     </task>
     <servers />
   </component>
