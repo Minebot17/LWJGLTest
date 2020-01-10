@@ -52,53 +52,6 @@ LightData calculateLight(int index, vec3 n, vec3 e) {
 	return result;
 }
 
-float getMaxRGB(float[3] color) {
-	float max = 0;
-	for (int i = 0; i < 3; i++)
-		if(i > max)
-			max = i;
-	return max;
-}
-
-float[3] cmykConvertToRgbInt(float[4] color) {
-	float r = (1.0-color[0]) * (1.0-color[3]);
-	float g = (1.0-color[1]) * (1.0-color[3]);
-	float b = (1.0-color[2]) * (1.0-color[3]);
-
-	return float[3](r, g, b);
-}
-
-float[4] rgbConvertToCmyk(float[3] color) {
-	float max = getMaxRGB(color);
-	float k = 1.0 - max;
-
-	if(k != 0) {
-		float c = (1.0-color[0]-k) / (1.0-k);
-		float m = (1.0-color[1]-k) / (1.0-k);
-		float y = (1.0-color[2]-k) / (1.0-k);
-
-		return float[](c, m, y, k);
-	}
-	else {
-		float c = 1.0-color[0];
-		float m = 1.0-color[1];
-		float y = 1.0-color[2];
-
-		return float[](c, m, y, k);
-	}
-}
-
-float[3] compoundRgb(float[3] colorRgb1, float[3] colorRgb2) {
-	float[4] colorCmyk1 = rgbConvertToCmyk(colorRgb1);
-	float[4] colorCmyk2 = rgbConvertToCmyk(colorRgb2);
-
-	float[4] colorCmykR;
-	for(int i = 0; i < 4; i++)
-		colorCmykR[i] = (colorCmyk1[i] + colorCmyk2[i])/2.0;
-
-	return cmykConvertToRgbInt(colorCmykR);
-}
-
 void main(){
 	vec3 n = normalize(texture(normalSampler, fs_in.uv).rgb*2.0 - 1.0);
 	vec3 e = normalize(fs_in.eyeDirection_tangentspace);
@@ -116,15 +69,13 @@ void main(){
 	if (lightCount != 0){
 		materialColor = materialColors[0];
 		specularColor = specularColors[0];
-		for (int i = 1; i < lightCount; i++){
-			float[] result = compoundRgb(float[3](materialColor.r, materialColor.g, materialColor.b), float[3](materialColors[i].r, materialColors[i].g, materialColors[i].b));
-			materialColor = vec3(result[0], result[1], result[2]);
-		}
-		for (int i = 1; i < lightCount; i++){
-			float[] result = compoundRgb(float[3](specularColor.r, specularColor.g, specularColor.b), float[3](specularColors[i].r, specularColors[i].g, specularColors[i].b));
-			specularColor = vec3(result[0], result[1], result[2]);
-		}
+		for (int i = 1; i < lightCount; i++)
+			materialColor = vec3(materialColor.r + materialColors[i].r, materialColor.g + materialColors[i].g, materialColor.b + materialColors[i].b);
+		for (int i = 1; i < lightCount; i++)
+		specularColor = vec3(specularColor.r + specularColors[i].r, specularColor.g + specularColors[i].g, specularColor.b + specularColors[i].b);
 	}
+	materialColor = clamp(materialColor, 0.0, 1.0);
+	specularColor = clamp(specularColor, 0.0, 1.0);
 
 	color = vec3(0.025, 0.025, 0.025) * originalMaterialColor + materialColor + specularColor;
 

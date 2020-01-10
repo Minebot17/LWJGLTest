@@ -83,9 +83,13 @@ public class Scene {
 
         addObject(new CameraController());
         //addObject(new DirectionalLight(new Vec3(3, 2, 0), new Vec3(-3, -2, 0).getUnitVector(), 2, new Vec3(1, 0, 0)));
-        DirectionalLight light = new DirectionalLight(new Vec3(0, 3, 0), new Vec3(-0, -1, 0).getUnitVector(), 5, new Vec3(1, 1, 1));
-        addObject(light);
-        addObject(new LightDebugObject(light));
+        DirectionalLight light0 = new DirectionalLight(new Vec3(-3, 2, 0), new Vec3(3, -2, 0).getUnitVector(), 3, new Vec3(1, 0, 0));
+        addObject(light0);
+        addObject(new LightDebugObject(light0));
+        DirectionalLight light1 = new DirectionalLight(new Vec3(3, 2, 0), new Vec3(-3, -2, 0).getUnitVector(), 3, new Vec3(0, 1, 0));
+        addObject(light1);
+        addObject(new LightDebugObject(light1));
+
         addObject(new StandartMeshObject(new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(1, 1, 1),
                 MeshRenders.spaceShipRender,
                 "textures/spaceShip/spaceShipAlbedo.png",
