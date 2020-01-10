@@ -40,7 +40,7 @@ LightData calculateLight(int index, vec3 n, vec3 e) {
 	vec3 r = reflect(-l, n);
 	result.cosAlpha = clamp(dot(e, r), 0, 1);
 	result.cosTheta = clamp(dot(n, l), 0, 1);
-	//result.visibility = 1.0;
+	result.visibility = 1.0;
 
 	float bias = 0.005*tan(acos(result.cosTheta)); // cosTheta is dot( n,l ), clamped between 0 and 1
 	bias = clamp(bias, 0,0.01);

@@ -11,13 +11,11 @@ public class MeshRenders {
     public static MeshRender spaceShipRender;
     public static MeshRender postQuadRender;
     public static MeshRender cubemapRender;
-    public static MeshRender sphereRender;
 
     public static void initialize(){
         spaceShipRender = new MeshRender(Meshes.spaceShip);
         postQuadRender = new MeshRender(Meshes.postQuad);
         cubemapRender = new MeshRender(Meshes.cubemap);
-        sphereRender = new MeshRender(Meshes.sphere);
 
         meshRenders.forEach(MeshRender::initialize);
     }

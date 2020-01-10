@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="627aa9d9-89e3-4b09-88e6-8d8e37c02b82" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/models/sphere.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LWJGLTest.iws" beforeDir="false" afterPath="$PROJECT_DIR$/LWJGLTest.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Scene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/StandartMeshObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/StandartMeshObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/MeshRenders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/MeshRenders.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Meshes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Meshes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/standart.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/standart.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/standart.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/standart.vert" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,6 +20,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="branch" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1VI1z70tVzOP4tq2SIhhDdis9yi" />
@@ -113,6 +111,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.UtilsTests.testRotation" />
+        <item itemvalue="JUnit.UtilsTests" />
         <item itemvalue="JUnit.UtilsTests.testRotation" />
         <item itemvalue="JUnit.UtilsTests" />
       </list>

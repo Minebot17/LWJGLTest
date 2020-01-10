@@ -160,16 +160,11 @@ public class Scene {
         glBindTexture(GL_TEXTURE_2D, light.getShadowTexture());
         Shaders.post.setUniform("shadow_texture", 10);
 
-        List<Vec3> positions = new ArrayList<>();
-        for (int i = 0; i < lightObjects.size(); i++)
-            positions.add(Utils.multiply(matrices.getProjection().multiply(matrices.getView().multiply(lightObjects.get(i).getModelMatrix())), new Vec3(0, 0, 0)));
-
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, postFramebuffer.getTextureId());
         Shaders.post.setUniform("rendered_texture", 0);
         Shaders.post.setUniform("time", glfwGetTime());
         Shaders.post.setUniform("gamma", 1.0f/2.2f);
-        //Shaders.post.setUniform("lightPositions_cameraspace", (Vec3[]) positions.toArray(new Vec3[0]));
         MeshRenders.postQuadRender.render();
 
         glEnable(GL_DEPTH_TEST);
