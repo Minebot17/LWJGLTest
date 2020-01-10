@@ -57,30 +57,18 @@ public class Scene {
 
         lastTime = System.nanoTime();
         logicTick();
-        /*Thread logic = new Thread(() -> {
-            while (true){
-                try {
-                    logicTicksCount++;
-                    logicTick();
-                    Thread.sleep(logicUpdateTime);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    break;
-                }
-            }
-        });
-        logic.start();*/
 
         while (!glfwWindowShouldClose(window.getId())) {
             renderTick();
             glfwSwapBuffers(window.getId());
             glfwPollEvents();
         }
-        //logic.stop();
     }
 
     // initialize post process, quad vao, msaa FB
     public void initialize(){
+        glPointSize(25);
+        glLineWidth(5);
         msaaFramebuffer.initialize();
         postFramebuffer.initialize();
         cubemapMaterial.initialize(new HashMap<String, String>(){{
@@ -94,8 +82,10 @@ public class Scene {
         testTextureMaterial.initialize(new HashMap<String, String>(){{put("texture", "textures/test.png");}}, new boolean[]{true});
 
         addObject(new CameraController());
-        addObject(new DirectionalLight(new Vec3(3, 2, 0), new Vec3(-3, -2, 0).getUnitVector(), 2, new Vec3(1, 1, 1)));
-        //addObject(new DirectionalLight(new Vec3(3, 2, 0), new Vec3(-3, -2, 0).getUnitVector(), 2, new Vec3(1, 1, 1)));
+        //addObject(new DirectionalLight(new Vec3(3, 2, 0), new Vec3(-3, -2, 0).getUnitVector(), 2, new Vec3(1, 0, 0)));
+        DirectionalLight light = new DirectionalLight(new Vec3(0, 3, 0), new Vec3(-0, -1, 0).getUnitVector(), 5, new Vec3(1, 1, 1));
+        addObject(light);
+        addObject(new LightDebugObject(light));
         addObject(new StandartMeshObject(new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(1, 1, 1),
                 MeshRenders.spaceShipRender,
                 "textures/spaceShip/spaceShipAlbedo.png",
@@ -105,41 +95,11 @@ public class Scene {
         //addObject(new TestMeshObject(new Vec3(), new Vec3(), new Vec3(1, 1, 1), MeshRenders.cubemapRender, new Material(Shaders.test)));
 
         isInitialized = true;
-
-        va = glGenVertexArrays();
-        glBindVertexArray(va);
-        buf = glGenBuffers();
-        glBindBuffer(GL_ARRAY_BUFFER, buf);
-        glBufferData(GL_ARRAY_BUFFER, vert, GL_STATIC_DRAW);
-        bufUv = glGenBuffers();
-        glBindBuffer(GL_ARRAY_BUFFER, bufUv);
-        glBufferData(GL_ARRAY_BUFFER, uvs, GL_STATIC_DRAW);
     }
-
-    public int va;
-    public int buf;
-    public int bufUv;
-    public float[] vert = new float[] {
-            -1.0f, -0.5f, 0.0f,
-            1.0f, -0.5f, 0.0f,
-            -1.0f,  1.0f, 0.0f,
-            -1.0f,  1.0f, 0.0f,
-            1.0f, -0.5f, 0.0f,
-            1.0f,  1.0f, 0.0f,
-    };
-    public float[] uvs = new float[]{
-            0, 1,
-            1, 1,
-            0, 0,
-            0, 0,
-            1, 1,
-            1, 0
-    };
 
     public void renderTick(){
         glCullFace(GL_FRONT_AND_BACK);
         glDepthFunc(GL_LEQUAL);
-        //glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         deltaTime = System.nanoTime() - lastTime;
         lastTime = System.nanoTime();
@@ -161,57 +121,21 @@ public class Scene {
         renderCubemap();
 
         for (SceneObject object : objects) {
-            Mat4 model = object.getModelMatrix();
-            Mat4 mvp = projection.multiply(view.multiply(model));
-            matrices.setModel(model);
-            matrices.setMvp(mvp);
+            updateModelMatrix(object.getModelMatrix());
             object.renderTick();
-
-            /*
-            Vec4[] res = new Vec4[6];
-            for (int i = 0; i < 6; i++)
-                res[i] = Utils.multiply(mvp, new Vec4(vert[i*3], vert[i*3 + 1], vert[i*3 + 2], 1));
-            return res;
-             */
         }
-
-        /*glBindVertexArray(va);
-        //glUseProgram(Shaders.test.getProgrammeId());
-        //Shaders.test.setUniform("mvp", projection.multiply(view));
-        testTextureMaterial.bindAll(new HashMap<String, Object>(){{put("mvp", projection.multiply(view));}});
-        glDisable(GL_DEPTH_TEST);
-        glEnableVertexAttribArray(0);
-        glBindBuffer(GL_ARRAY_BUFFER, buf);
-        glVertexAttribPointer(
-                0,                  // Àòðèáóò 0. Ïîäðîáíåå îá ýòîì áóäåò ðàññêàçàíî â ÷àñòè, ïîñâÿùåííîé øåéäåðàì.
-                3,                  // Ðàçìåð
-                GL_FLOAT,           // Òèï
-                false,           // Óêàçûâàåò, ÷òî çíà÷åíèÿ íå íîðìàëèçîâàíû
-                0,                  // Øàã
-                0            // Ñìåùåíèå ìàññèâà â áóôåðå
-        );
-        glEnableVertexAttribArray(1);
-        glBindBuffer(GL_ARRAY_BUFFER, bufUv);
-        glVertexAttribPointer(
-                1,                  // Àòðèáóò 0. Ïîäðîáíåå îá ýòîì áóäåò ðàññêàçàíî â ÷àñòè, ïîñâÿùåííîé øåéäåðàì.
-                2,                  // Ðàçìåð
-                GL_FLOAT,           // Òèï
-                false,           // Óêàçûâàåò, ÷òî çíà÷åíèÿ íå íîðìàëèçîâàíû
-                0,                  // Øàã
-                0            // Ñìåùåíèå ìàññèâà â áóôåðå
-        );
-        glDrawArrays(GL_TRIANGLES, 0, 6);
-        glDisableVertexAttribArray(0);
-        glDisableVertexAttribArray(1);
-        glEnable(GL_DEPTH_TEST);*/
-
-        //glPolygonMode( GL_FRONT_AND_BACK, GL_FILL);
 
         glBindFramebuffer(GL_READ_FRAMEBUFFER, msaaFramebuffer.getFramebufferId());
         glBindFramebuffer(GL_DRAW_FRAMEBUFFER, postFramebuffer.getFramebufferId());
         glBlitFramebuffer(0, 0, window.getWidth(), window.getHeight(), 0, 0, window.getWidth(), window.getHeight(), GL_COLOR_BUFFER_BIT, GL_NEAREST);
         msaaFramebuffer.unbind();
         renderPost();
+    }
+
+    public void updateModelMatrix(Mat4 model){
+        Mat4 mvp = matrices.getProjection().multiply(matrices.getView().multiply(model));
+        matrices.setModel(model);
+        matrices.setMvp(mvp);
     }
 
     private void renderCubemap(){
@@ -232,11 +156,16 @@ public class Scene {
         glBindTexture(GL_TEXTURE_2D, light.getShadowTexture());
         Shaders.post.setUniform("shadow_texture", 10);
 
+        List<Vec3> positions = new ArrayList<>();
+        for (int i = 0; i < lightObjects.size(); i++)
+            positions.add(Utils.multiply(matrices.getProjection().multiply(matrices.getView().multiply(lightObjects.get(i).getModelMatrix())), new Vec3(0, 0, 0)));
+
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, postFramebuffer.getTextureId());
         Shaders.post.setUniform("rendered_texture", 0);
         Shaders.post.setUniform("time", glfwGetTime());
         Shaders.post.setUniform("gamma", 1.0f/2.2f);
+        //Shaders.post.setUniform("lightPositions_cameraspace", (Vec3[]) positions.toArray(new Vec3[0]));
         MeshRenders.postQuadRender.render();
 
         glEnable(GL_DEPTH_TEST);

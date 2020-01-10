@@ -67,6 +67,6 @@ public class StandartMeshObject extends MeshObject {
 
     @Override
     public void logicTick() {
-        rotation = rotation.add(new Vec3(0, 0.01f, 0));
+        //rotation = rotation.add(new Vec3(0, 0.01f, 0));
     }
 }

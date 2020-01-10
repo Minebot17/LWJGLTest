@@ -44,6 +44,7 @@ LightData calculateLight(int index, vec3 n, vec3 e) {
 
 	float bias = 0.005*tan(acos(result.cosTheta)); // cosTheta is dot( n,l ), clamped between 0 and 1
 	bias = clamp(bias, 0,0.01);
+	//result.cosTheta = 1.0;
 
 	for (int i=0;i<4;i++)
 		if (texture(shadowSampler[index], fs_in.shadowCoord[index].xy + poissonDisk[i]/1000.0).r < fs_in.shadowCoord[index].z-bias-0.005)

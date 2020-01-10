@@ -15,6 +15,7 @@ public class Shaders {
     public static Shader test;
     public static Shader testScreen;
     public static Shader testTexture;
+    public static Shader lightPosition;
 
     public static void initialize(){
         shadowMap = new Shader("shaders/shadowMap.vert", "shaders/shadowMap.frag", null);
@@ -24,6 +25,7 @@ public class Shaders {
         test = new Shader("shaders/test.vert", "shaders/test.frag", null);
         testScreen = new Shader("shaders/testScreen.vert", "shaders/test.frag", null);
         testTexture = new Shader("shaders/testTexture.vert", "shaders/testTexture.frag", null);
+        lightPosition = new Shader("shaders/lightPosition.vert", "shaders/lightPosition.frag", null);
 
         shaders.forEach(Shader::initialization);
     }

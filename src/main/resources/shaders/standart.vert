@@ -32,7 +32,7 @@ void main(){
 	vec3 vertexPosition_cameraspace = (view * model * vec4(vertexPosition_modelspace, 1)).xyz;
 	vec3 lightDirection_cameraspace[lightMaxCount];
 	for (int i = 0; i < lightCount; i++)
-		lightDirection_cameraspace[i] = (view * vec4(lightPosition_worldspace[i] - (model * vec4(vertexPosition_modelspace, 1)).xyz, 0)).xyz;
+		lightDirection_cameraspace[i] = (view * vec4(lightPosition_worldspace[i] - vec3(model * vec4(vertexPosition_modelspace, 1)), 1)).xyz;
 
 	vec3 eyeDirection_cameraspace = -vertexPosition_cameraspace;
 
