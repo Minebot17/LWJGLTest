@@ -44,4 +44,16 @@ public abstract class SceneObject {
     public Vec3 getScale() {
         return scale;
     }
+
+    public void setPosition(Vec3 position) {
+        this.position = position;
+    }
+
+    public void setRotation(Vec3 rotation) {
+        this.rotation = rotation;
+    }
+
+    public void setScale(Vec3 scale) {
+        this.scale = scale;
+    }
 }

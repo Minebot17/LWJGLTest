@@ -90,32 +90,20 @@ public class Shader {
                 glUniform1dv(location, (double[]) value);
             else if (value instanceof Vec3[]) {
                 Vec3[] array = (Vec3[]) value;
-                FloatBuffer buffer = FloatBuffer.allocate(3 * array.length);
-                for (Vec3 vec3 : array)
-                    buffer.put(new float[]{vec3.getX(), vec3.getY(), vec3.getZ()});
-                buffer.flip();
-                glUniform3fv(location, buffer.array());
+                for (int i = 0; i < array.length; i++)
+                    glUniform3f(glGetUniformLocation(programmeId, name + "[" + i + "]"), array[i].getX(), array[i].getY(), array[i].getZ());
             } else if (value instanceof Vec4[]) {
                 Vec4[] array = (Vec4[]) value;
-                FloatBuffer buffer = FloatBuffer.allocate(4 * array.length);
-                for (Vec4 vec4 : array)
-                    buffer.put(new float[]{vec4.getX(), vec4.getY(), vec4.getZ(), vec4.getW()});
-                buffer.flip();
-                glUniform4fv(location, buffer.array());
+                for (int i = 0; i < array.length; i++)
+                    glUniform4f(glGetUniformLocation(programmeId, name + "[" + i + "]"), array[i].getX(), array[i].getY(), array[i].getZ(), array[i].getW());
             } else if (value instanceof Mat3[]) {
                 Mat3[] array = (Mat3[]) value;
-                FloatBuffer buffer = FloatBuffer.allocate(9 * array.length);
-                for (Mat3 mat3 : array)
-                    buffer.put(mat3.getBuffer().array());
-                buffer.flip();
-                glUniformMatrix3fv(location, false, buffer.array());
+                for (int i = 0; i < array.length; i++)
+                    glUniformMatrix3fv(glGetUniformLocation(programmeId, name + "[" + i + "]"), false, array[i].getBuffer().array());
             } else if (value instanceof Mat4[]) {
                 Mat4[] array = (Mat4[]) value;
-                FloatBuffer buffer = FloatBuffer.allocate(16 * array.length);
-                for (Mat4 mat4 : array)
-                    buffer.put(mat4.getBuffer().array());
-                buffer.flip();
-                glUniformMatrix4fv(location, false, buffer.array());
+                for (int i = 0; i < array.length; i++)
+                    glUniformMatrix4fv(glGetUniformLocation(programmeId, name + "[" + i + "]"), false, array[i].getBuffer().array());
             }
         }
     }

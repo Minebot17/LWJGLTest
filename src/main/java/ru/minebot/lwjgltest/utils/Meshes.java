@@ -12,12 +12,14 @@ public class Meshes {
     public static Mesh spaceShip;
     public static Mesh postQuad;
     public static Mesh cubemap;
+    public static Mesh sphere;
 
     public static void initialize(){
         spaceShip = new Mesh("models/spaceShip.obj");
         postQuad = new Mesh("models/postQuad.obj");
         cubemap = new Mesh();
         initCubemap();
+        sphere = new Mesh("models/sphere.obj");
 
         meshes.forEach(Mesh::initialize);
     }

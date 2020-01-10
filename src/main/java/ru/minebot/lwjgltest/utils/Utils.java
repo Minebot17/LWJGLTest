@@ -88,15 +88,16 @@ public class Utils {
     }
 
     public static Vec3 quaternionToEuler(Vec3 axis, float angle){
-        double y = Math.asin(2f*(angle*axis.getX() - axis.getZ()*axis.getY()));
+        // TODO fix to YXZ
+        double y = Math.asin(2f*(angle*axis.getX() + axis.getY()*axis.getZ()));
         double x, z;
         if (Math.abs(Math.abs(y) - Math.PI/2f) < 0.005f || y != y){
-            x = Math.atan(axis.getZ()/angle);
+            x = Math.atan(axis.getY()/angle);
             z = 0f;
         }
         else {
-            x = Math.atan((angle*axis.getZ() + axis.getX()*axis.getY())/(1f - 2f*(axis.getZ()*axis.getZ() + axis.getX()*axis.getX())));
-            z = Math.atan((2f*(angle*axis.getY() + axis.getZ()*axis.getX()))/(1f - 2f*(axis.getX()*axis.getX() + axis.getY()*axis.getY())));
+            x = Math.atan((2f*(angle*axis.getY() - axis.getX()*axis.getZ()))/(1f - 2f*(axis.getY()*axis.getY() + axis.getX()*axis.getX())));
+            z = Math.atan((2f*(angle*axis.getZ() - axis.getY()*axis.getX()))/(1f - 2f*(axis.getX()*axis.getX() + axis.getZ()*axis.getZ())));
         }
 
         return new Vec3((float)x, (float)y, (float)z);
@@ -167,8 +168,9 @@ public class Utils {
     }
 
     public static Vec3 getEulerFromDirection(Vec3 D){
-        double angleZ = Math.atan2(D.getY(), D.getX());
         double angleY = Math.atan2(D.getZ(), D.getX());
+        D = Utils.multiply(Utils.rotation(new Vec3(0, (float)-angleY, 0)), D);
+        double angleZ = Math.atan2(D.getY(), D.getX());
         return new Vec3((float) 0, (float) -angleY, (float) angleZ);
     }
 

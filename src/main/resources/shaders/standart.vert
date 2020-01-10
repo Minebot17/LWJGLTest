@@ -30,11 +30,12 @@ void main(){
 
 	// Vector that goes from the vertex to the camera, in camera space.
 	vec3 vertexPosition_cameraspace = (view * model * vec4(vertexPosition_modelspace, 1)).xyz;
+	vec3 eyeDirection_cameraspace = -vertexPosition_cameraspace;
+
 	vec3 lightDirection_cameraspace[lightMaxCount];
 	for (int i = 0; i < lightCount; i++)
-		lightDirection_cameraspace[i] = (view * vec4(lightPosition_worldspace[i] - (model * vec4(vertexPosition_modelspace, 1)).xyz, 0)).xyz;
+		lightDirection_cameraspace[i] = eyeDirection_cameraspace + (view * vec4(lightPosition_worldspace[i], 1)).xyz;
 
-	vec3 eyeDirection_cameraspace = -vertexPosition_cameraspace;
 
 	// Normal of the the vertex, in camera space
 	vs_out.normal_cameraspace = (view * model * vec4(vertexNormal, 0)).xyz; // Only correct if ModelMatrix does not scale the model ! Use its inverse transpose if not

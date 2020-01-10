@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="627aa9d9-89e3-4b09-88e6-8d8e37c02b82" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/models/sphere.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LWJGLTest.iws" beforeDir="false" afterPath="$PROJECT_DIR$/LWJGLTest.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/Scene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/StandartMeshObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/objects/StandartMeshObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/MeshRenders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/MeshRenders.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Meshes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Meshes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/minebot/lwjgltest/utils/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/standart.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/standart.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/standart.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/standart.vert" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,7 +33,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/textures" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/models" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -40,16 +47,16 @@
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\serpi\Documents\Java Projects\LWJGLTest\src\main\resources\textures" />
-      <recent name="C:\Users\serpi\Documents\Java Projects\LWJGLTest\src\main\resources\textures\sky" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\serpi\Documents\Java Projects\LWJGLTest\src\main\resources\models" />
       <recent name="C:\Users\serpi\Documents\Java Projects\LWJGLTest\src\main\resources\textures" />
       <recent name="C:\Users\serpi\Documents\Java Projects\LWJGLTest\src\main\resources\shaders" />
       <recent name="C:\Users\serpi\Documents\Java Projects\LWJGLTest\src\main\resources\textures\spaceShip" />
       <recent name="C:\Users\serpi\Documents\Java Projects\LWJGLTest\src\main\resources\textures\sky" />
-      <recent name="C:\Users\serpi\Documents\Java Projects\LWJGLTest\src\main\resources\models" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\serpi\Documents\Java Projects\LWJGLTest\src\main\resources\textures" />
+      <recent name="C:\Users\serpi\Documents\Java Projects\LWJGLTest\src\main\resources\textures\sky" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -106,8 +113,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.UtilsTests" />
         <item itemvalue="JUnit.UtilsTests.testRotation" />
+        <item itemvalue="JUnit.UtilsTests" />
       </list>
     </recent_temporary>
   </component>
@@ -156,9 +163,8 @@
       <workItem from="1578205336318" duration="8668000" />
       <workItem from="1578214441448" duration="126000" />
       <workItem from="1578300341848" duration="3235000" />
-      <workItem from="1578303607610" duration="30000" />
-      <workItem from="1578312209410" duration="111000" />
-      <workItem from="1578559681414" duration="639000" />
+      <workItem from="1578635630745" duration="5852000" />
+      <workItem from="1578647935951" duration="3898000" />
     </task>
     <servers />
   </component>
